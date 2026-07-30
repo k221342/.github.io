@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <title>Limerick Map</title>
 
-<style>
-html,body{
-    margin:0;
-    height:100%;
-}
-#map{
-    width:100%;
-    height:100vh;
-}
-</style>
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
@@ -29,13 +28,32 @@ html,body{
 <script>
 
 const map = L.map('map').setView(
-[52.682556,-8.659160],
-15
+    [52.682556, -8.659160],
+    15
 );
 
 L.tileLayer(
-'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        attribution: '&copy; OpenStreetMap contributors'
+    }
 ).addTo(map);
+
+const homeIcon = L.divIcon({
+    html: '<i class="fa-solid fa-house"></i>',
+    className: 'home-icon',
+    iconSize: [80, 80],
+    iconAnchor: [40, 80]
+});
+
+L.marker(
+    [52.682556, -8.659160],
+    {
+        icon: homeIcon
+    }
+)
+.addTo(map)
+.bindPopup('Thomond Student Village');
 
 </script>
 

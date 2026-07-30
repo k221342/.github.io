@@ -10,29 +10,32 @@
     <link rel="stylesheet" href="index.css">
 
     <link rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.9iv id="map"></div>
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
 
-<script src="https://unpkg.com/leaflet@1flet.jsscript>
+<body>
 
-<script>
+    <div id="map"></div>
 
-const map = L.map('map').setView(
-    [52.6638, -8.6267],
-    13
-);
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-L.tileLayer(
-    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-        attribution: '&copy; OpenStreetMap'
-    }
-).addTo(map);
+    <script>
+        const map = L.map('map').setView(
+            [52.6638, -8.6267],
+            13
+        );
 
-L.marker([52.6638, -8.6267])
- .addTo(map)
- .bindPopup('Limerick');
+        L.tileLayer(
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                attribution: '&copy; OpenStreetMap contributors'
+            }
+        ).addTo(map);
 
-</script>
+        L.marker([52.6638, -8.6267])
+            .addTo(map)
+            .bindPopup('Limerick');
+    </script>
 
 </body>
 

@@ -20,22 +20,33 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        const map = L.map('map').setView(
-            [52.682556, -8.659160],
-            15
-        );
 
-        L.tileLayer(
-            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            {
-                attribution: '&copy; OpenStreetMap contributors'
-            }
-        ).addTo(map);
+    const map = L.map('map').setView(
+        [52.682556, -8.659160],
+        15
+    );
 
-        L.marker([52.682556, -8.659160])
-            .addTo(map)
-            .bindPopup('🏠 Thomond Student Village');
-    </script>
+    L.tileLayer(
+        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+            attribution: '&copy; OpenStreetMap contributors'
+        }
+    ).addTo(map);
+
+    const homeIcon = L.divIcon({
+        html: '🏠',
+        className: 'home-icon',
+        iconSize: [32, 32]
+    });
+
+    L.marker(
+        [52.682556, -8.659160],
+        { icon: homeIcon }
+    )
+    .addTo(map)
+    .bindPopup('🏠 Thomond Student Village');
+
+</script>
 
 </body>
 

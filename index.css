@@ -85,6 +85,9 @@ body {
 .pizza-icon i {
     color: var(--restaurant-color);
 }
+.drumstick-icon i {
+    color: var(--cafe-color);
+}
 
 /* ガソリンスタンド */
 .gs-icon i {

@@ -1,155 +1,30 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
 
-    <title>Limerick Life Map</title>
+    <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-    <link rel="stylesheet" href= rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4   <h1>🇮🇪 Limerick Life Map</h1>
+ id="map"></div>
 
-    <div class="filter-panel">
-        <button onclick="showCategory('all')">すべて</button>
-        <button onclick="showCategory('supermarket')">スーパー</button>
-        <button onclick="showCategory('cafe')">カフェ</button>
-        <button onclick="showCategory('restaurant')">レストラン</button>
-        <button onclick="showCategory('pub')">パブ</button>
-    </div>
-</header>
+    https://unpkg.com/leaflet@1.9.4/dist/leaflet.jsscript>
 
-<div id="map"></div>
+    <script>
 
-https://unpkg.com/leaflet@1.9.4/dist/leaflet.jsscript>
+        const map = L.map('map')
+            .setView([52.6638, -8.6267], 13);
 
-<script>
-
-const map = L.map('map').setView([52.6638, -8.6267], 14);
-
-L.tileLayer(
-    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-        attribution:
-        '&copy; OpenStreetMap contributors'
-    }
-).addTo(map);
-
-const markers = [];
-
-function addMarker(lat, lng, category, html) {
-
-    const marker = L.marker([lat, lng])
-        .addTo(map)
-        .bindPopup(html);
-
-    marker.category = category;
-
-    markers.push(marker);
-}
-
-/* ===== 拠点 ===== */
-
-addMarker(
-    52.6638,
-    -8.6267,
-    'base',
-    `
-    <h3>リムリック拠点</h3>
-    <p>生活拠点</p>
-    `
-);
-
-/* ===== スーパー ===== */
-
-addMarker(
-    52.6688,
-    -8.6300,
-    'supermarket',
-    `
-    <h3>Tesco</h3>
-    <p>大型スーパー</p>
-    `
-);
-
-addMarker(
-    52.6615,
-    -8.6200,
-    'supermarket',
-    `
-    <h3>Dunnes Stores</h3>
-    <p>食品・日用品</p>
-    `
-);
-
-/* ===== カフェ ===== */
-
-addMarker(
-    52.6654,
-    -8.6230,
-    'cafe',
-    `
-    <h3>おすすめカフェ</h3>
-    <p>コーヒー</p>
-    `
-);
-
-/* ===== レストラン ===== */
-
-addMarker(
-    52.6660,
-    -8.6180,
-    'restaurant',
-    `
-    <h3>レストラン</h3>
-    <p>ローカル料理</p>
-    `
-);
-
-/* ===== パブ ===== */
-
-addMarker(
-    52.6640,
-    -8.6290,
-    'pub',
-    `
-    <h3>Irish Pub</h3>
-    <p>ギネスがおすすめ</p>
-    `
-);
-
-/* ===== フィルタ ===== */
-
-function showCategory(category){
-
-    markers.forEach(marker => {
-
-        if(category === "all"){
-
-            if(!map.hasLayer(marker)){
-                marker.addTo(map);
+        L.tileLayer(
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                attribution: '&copy; OpenStreetMap contributors'
             }
+        ).addTo(map);
 
-        } else {
-
-            if(marker.category === category){
-
-                if(!map.hasLayer(marker)){
-                    marker.addTo(map);
-                }
-
-            } else {
-
-                if(map.hasLayer(marker)){
-                    map.removeLayer(marker);
-                }
-
-            }
-        }
-    });
-}
-
-</script>
+    </script>
 
 </body>
+
 </html>

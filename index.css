@@ -1,21 +1,31 @@
+:root {
+    --marker-size: 64;
+    --home-color: #1976d2;
+    --supermarket-color: #2e7d32;
+    --cafe-color: #8d6e63;
+    --restaurant-color: #d84315;
+    --pub-color: #6a1b9a;
+}
+
 html,
 body {
     margin: 0;
     padding: 0;
+    width: 100%;
     height: 100%;
 }
 
+/* Leaflet地図は高さ指定が必須 */
 #map {
     width: 100%;
     height: 100vh;
 }
 
-.home-icon {
-
-    width: 80px;
-    height: 80px;
-
-    line-height: 80px;
+/* すべてのFont Awesome地図アイコン共通 */
+.map-icon {
+    width: calc(var(--marker-size) * 1px);
+    height: calc(var(--marker-size) * 1px);
+    line-height: calc(var(--marker-size) * 1px);
 
     text-align: center;
 
@@ -23,13 +33,53 @@ body {
     border: none !important;
 }
 
-.home-icon i {
-
-    font-size: 70px;
-
-    color: #1976D2;
+/* アイコン本体 */
+.map-icon i {
+    font-size: calc(var(--marker-size) * 0.85px);
 
     text-shadow:
         0 0 3px white,
-        0 0 6px white;
+        0 0 6px white,
+        0 0 9px white;
+}
+
+/* 宿泊先 */
+.home-icon i {
+    color: var(--home-color);
+}
+
+/* スーパー */
+.supermarket-icon i {
+    color: var(--supermarket-color);
+}
+
+/* カフェ */
+.cafe-icon i {
+    color: var(--cafe-color);
+}
+
+/* レストラン */
+.restaurant-icon i {
+    color: var(--restaurant-color);
+}
+
+/* パブ */
+.pub-icon i {
+    color: var(--pub-color);
+}
+
+/* ポップアップ */
+.leaflet-popup-content {
+    font-family:
+        "Segoe UI",
+        "Hiragino Sans",
+        "Yu Gothic",
+        sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.leaflet-popup-content b {
+    color: #222;
+    font-size: 15px;
 }

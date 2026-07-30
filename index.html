@@ -81,6 +81,11 @@
             'fa-solid fa-beer-mug-empty',
             'map-icon pub-icon'
         );
+        
+        const parkIcon = createIcon(
+            'fa-solid fa-tree',
+            'map-icon park-icon'
+        );
 
         // Thomond Student Village
         L.marker(
@@ -132,6 +137,16 @@
         .bindPopup(`
             <b>Pub Sample</b><br>
             パブ候補
+        `);
+
+        L.marker(
+            [52.66958, -8.64655],
+            { icon: parkIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Park Sample</b><br>
+            公園
         `);
     </script>
 

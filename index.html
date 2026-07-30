@@ -77,6 +77,11 @@
             'map-icon convenience-icon'
         );
 
+        const pharmacyIcon = createIcon(
+            'fa-solid fa-capsules',
+            'map-icon pharmacy-icon'
+        );
+        
         const cafeIcon = createIcon(
             'fa-solid fa-mug-hot',
             'map-icon cafe-icon'
@@ -106,17 +111,6 @@
         .bindPopup(`
             <b>拠点</b><br>
             Thomond student villge
-        `);
-
-        // 以下はサンプル位置。実際の店の座標に後で置き換える
-        L.marker(
-            [52.6816, -8.6558],
-            { icon: supermarketIcon }
-        )
-        .addTo(map)
-        .bindPopup(`
-            <b>Supermarket Sample</b><br>
-            スーパー候補
         `);
 
         // スーパーマーケット
@@ -194,7 +188,7 @@
             平日 7:00 - 22:00<br>
             休日 8:00 - 22:00<br>
             <i class="fa-solid fa-car"></i> 車 2分<br>
-            <i class="fa-solid fa-person-running"></i>徒歩 7分
+            <i class="fa-solid fa-person-walking"></i>徒歩 7分
         `);
 
         L.marker(
@@ -209,6 +203,34 @@
             土曜 8:00 - 21:00<br>
             日曜 9:00 - 21:00<br>
             <i class="fa-solid fa-car"></i> 車 3分
+        `);
+
+        L.marker(
+            [52.6757773535446, -8.652230096706036],
+            { icon: pharmacyIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Woodview Pharmacy</b><br>
+            ドラッグストア<br>
+            平日  9:00 - 18:00<br>
+            土曜 10:00 - 17:00<br>
+            日休<br>
+            <i class="fa-solid fa-car"></i> 車 3分
+        `);
+
+        L.marker(
+            [52.67890336357734, -8.637972289621006],
+            { icon: pharmacyIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>People's Pharmacy</b><br>
+            ドラッグストア<br>
+            平日  9:30 - 18:00<br>
+            土曜 10:00 - 16:00<br>
+            日休<br>
+            <i class="fa-solid fa-car"></i> 車 7分
         `);
         
         L.marker(
@@ -251,7 +273,7 @@
             公園<br>
             一般利用可能 by Gemini<br>
             <i class="fa-solid fa-car"></i> 車 3分<br>
-            <i class="fa-solid fa-person-running"></i>徒歩 14分
+            <i class="fa-solid fa-person-walking"></i>徒歩 14分
         `);
     </script>
 

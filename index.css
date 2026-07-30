@@ -54,6 +54,16 @@ body {
     color: var(--supermarket-color);
 }
 
+/* ショッピングセンター */
+.shoppingcentre-icon i {
+    color: var(--supermarket-color);
+}
+
+/* コンビニ */
+.convenience-icon i {
+    color: var(--supermarket-color);
+}
+
 /* カフェ */
 .cafe-icon i {
     color: var(--cafe-color);

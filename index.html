@@ -106,6 +106,11 @@
             'fa-solid fa-drumstick-bite',
             'map-icon drumstick-icon'
         );
+
+        const gsIcon = createIcon(
+            'fa-solid fa-gas-pump',
+            'map-icon gs-icon'
+        );
         
         const pubIcon = createIcon(
             'fa-solid fa-beer-mug-empty',
@@ -404,18 +409,71 @@
             <i class="fa-solid fa-car"></i> 車 6分
         `);
 
-        
-        
+        // ガソリンスタンド
         L.marker(
-            [52.6860, -8.6600],
-            { icon: pubIcon }
+            [52.66808124193327, -8.64193334207248],
+            { icon: gsIcon }
         )
         .addTo(map)
         .bindPopup(`
-            <b>Pub Sample</b><br>
-            パブ候補
+            <b>Circle K Express</b><br>
+            ガソリンスタンド
+            7:00 - 23:00
+            <i class="fa-solid fa-car"></i> 車 7分
         `);
 
+        L.marker(
+            [52.6729351114931, -8.666084052432243],
+            { icon: gsIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Circle K Express</b><br>
+            ガソリンスタンド
+            月火水木金 6:00 - 0:00
+            土日　　　 7:00 - 0:00
+            <i class="fa-solid fa-car"></i> 車 5分
+        `);
+
+        L.marker(
+            [52.67946035206716, -8.63770318605932],
+            { icon: gsIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Inver Moyross</b><br>
+            ガソリンスタンド
+            月火水木金 7:00 - 21:00
+            土　　　　 8:00 - 18:00
+            日　　　　 9:00 - 18:00
+            <i class="fa-solid fa-car"></i> 車 7分
+        `);
+
+        L.marker(
+            [52.673208381388726, -8.635297398810131],
+            { icon: gsIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Circle K Thomond</b><br>
+            ガソリンスタンド
+            24時間営業
+            <i class="fa-solid fa-car"></i> 車 6分
+        `);
+
+        L.marker(
+            [52.67714486323797, -8.673870061481741],
+            { icon: gsIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Certa Fuel Coonagh Cross</b><br>
+            ガソリンスタンド
+            24時間営業
+            <i class="fa-solid fa-car"></i> 車 4分
+        `);
+
+        // 公園
         L.marker(
             [52.676616, -8.665151],
             { icon: parkIcon }

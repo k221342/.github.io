@@ -101,6 +101,11 @@
             'fa-solid fa-pizza-slice',
             'map-icon pizza-icon'
         );
+
+        const drumstickIcon = createIcon(
+            'fa-solid fa-drumstick-bite',
+            'map-icon drumstick-icon'
+        );
         
         const pubIcon = createIcon(
             'fa-solid fa-beer-mug-empty',
@@ -242,15 +247,45 @@
             日休<br>
             <i class="fa-solid fa-car"></i> 車 7分
         `);
-        
+
+        // カフェ
         L.marker(
-            [52.6798, -8.6572],
+            [52.67530755222063, -8.657995253635567],
             { icon: cafeIcon }
         )
         .addTo(map)
         .bindPopup(`
-            <b>Cafe Sample</b><br>
-            カフェ候補
+            <b>Chill The Beans Ennis Road</b><br>
+            カフェ<br>
+            月土日　 8:00 - 16:00<br>
+            火水木金 7:00 - 17:00<br>
+            <i class="fa-solid fa-car"></i> 車 7分
+        `);
+
+        L.marker(
+            [52.6751992151071, -8.678170002498044],
+            { icon: cafeIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Coffee Rush Drive Thru</b><br>
+            コーヒーショップ<br>
+            日曜以外 7:00 - 19:00<br>
+            日曜　　 8:00 - 19:00<br>
+            <i class="fa-solid fa-car"></i> 車 4分
+        `);
+
+        L.marker(
+            [52.66687441496519, -8.642870815662901],
+            { icon: cafeIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Javinos Caffe</b><br>
+            カフェ<br>
+            日曜以外 9:00 - 16:30<br>
+            日休
+            <i class="fa-solid fa-car"></i> 車 7分
         `);
 
         // レストラン
@@ -329,6 +364,47 @@
             金土日　 15:00 - 1:30<br>
             <i class="fa-solid fa-car"></i> 車 8分
         `);
+
+        L.marker(
+            [52.671146921151596, -8.656159674097314],
+            { icon: drumstickIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>KFC ENNIS</b><br>
+            KFC<br>
+            月火水日 11:30 - 21:00<br>
+            木金土　 11:30 - 21:30<br>
+            <i class="fa-solid fa-car"></i> 車 8分
+        `);
+
+        L.marker(
+            [52.67651868844412, -8.638542275188833],
+            { icon: restaurantIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Freda's Fish & Chips</b><br>
+            レストラン<br>
+            月火水土 10:00 - 22:30<br>
+            木金　　 10:00 - 23:00<br>
+            日　　　 15:00 - 23:00<br>
+            <i class="fa-solid fa-car"></i> 車 6分
+        `);
+        
+        L.marker(
+            [52.671571905384624, -8.634437986826388],
+            { icon: restaurantIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Pa's chipper</b><br>
+            タコス<br>
+            木金土日 17:00 - 24:00<br>
+            <i class="fa-solid fa-car"></i> 車 6分
+        `);
+
+        
         
         L.marker(
             [52.6860, -8.6600],

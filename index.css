@@ -79,6 +79,12 @@ body {
 .restaurant-icon i {
     color: var(--restaurant-color);
 }
+.burger-icon i {
+    color: var(--restaurant-color);
+}
+.pizza-icon i {
+    color: var(--restaurant-color);
+}
 
 /* パブ */
 .pub-icon i {

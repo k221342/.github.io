@@ -92,6 +92,16 @@
             'map-icon restaurant-icon'
         );
 
+        const burgerIcon = createIcon(
+            'fa-solid fa-burger',
+            'map-icon burger-icon'
+        );
+
+        const pizzaIcon = createIcon(
+            'fa-solid fa-pizza-slice',
+            'map-icon pizza-icon'
+        );
+        
         const pubIcon = createIcon(
             'fa-solid fa-beer-mug-empty',
             'map-icon pub-icon'
@@ -243,16 +253,83 @@
             カフェ候補
         `);
 
+        // レストラン
         L.marker(
-            [52.6840, -8.6620],
+            [52.670255994586824, -8.65742990863343],
             { icon: restaurantIcon }
         )
         .addTo(map)
         .bindPopup(`
-            <b>Restaurant Sample</b><br>
-            レストラン候補
+            <b>Shamrock Chinese Restaurant</b><br>
+            中華料理<br>
+            16:30 - 22:30<br>
+            <i class="fa-solid fa-car"></i> 車 7分
         `);
 
+        L.marker(
+            [52.678784761763254, -8.638311746352427],
+            { icon: restaurantIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Chef Chi Limerick</b><br>
+            中華料理<br>
+            16:00 - 22:30<br>
+            <i class="fa-solid fa-car"></i> 車 7分
+        `);
+
+        L.marker(
+            [52.66890510211225, -8.654144717516575],
+            { icon: burgerIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Deadlies Catch</b><br>
+            ハンバーガーショップ<br>
+            水木土  9:00 - 21:00<br>
+            金　　  9:00 - 22:00<br>
+            日　　 10:00 - 20:00<br>
+            <i class="fa-solid fa-car"></i> 車 7分
+        `);
+
+        L.marker(
+            [52.668885146012855, -8.66112559586838],
+            { icon: burgerIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>McDonald's</b><br>
+            ハンバーガーショップ<br>
+            7:00 - 23:00<br>
+            <i class="fa-solid fa-car"></i> 車 6分
+        `);
+
+        L.marker(
+            [52.6717714286797, -8.658514088308015],
+            { icon: pizzaIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>PIZZA Guys</b><br>
+            ピザ<br>
+            月火水　 16:00 - 23:50<br>
+            木金土日 15:00 - 23:50<br>
+            <i class="fa-solid fa-car"></i> 車 7分
+        `);
+
+        L.marker(
+            [52.67454350593738, -8.632544942644824],
+            { icon: pizzaIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>KING'S PIZZA</b><br>
+            ピザ<br>
+            月火水木 15:00 - 1:00<br>
+            金土日　 15:00 - 1:30<br>
+            <i class="fa-solid fa-car"></i> 車 8分
+        `);
+        
         L.marker(
             [52.6860, -8.6600],
             { icon: pubIcon }

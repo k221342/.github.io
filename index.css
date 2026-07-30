@@ -1,11 +1,11 @@
 :root {
     --marker-size: 32;
     --home-color: #000000;
-    --supermarket-color: #ffa500;
+    --supermarket-color: #00bfff;
     --pharmacy-color: #0000ff;
     --cafe-color: #8d6e63;
-    --restaurant-color: #d84315;
-    --pub-color: #6a1b9a;
+    --restaurant-color: #f4a460;
+    --gs-color: #ff0000;
     --park-color: #2e7d32;
 }
 
@@ -84,6 +84,11 @@ body {
 }
 .pizza-icon i {
     color: var(--restaurant-color);
+}
+
+/* ガソリンスタンド */
+.gs-icon i {
+    color: var(--gs-color);
 }
 
 /* パブ */

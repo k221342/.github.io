@@ -67,6 +67,16 @@
             'map-icon supermarket-icon'
         );
 
+        const shoppingcentreIcon = createIcon(
+            'fa-solid fa-city',
+            'map-icon shoppingcentre-icon'
+        );
+
+        const convenienceIcon = createIcon(
+            'fa-solid fa-store',
+            'map-icon convenience-icon'
+        );
+
         const cafeIcon = createIcon(
             'fa-solid fa-mug-hot',
             'map-icon cafe-icon'
@@ -109,6 +119,98 @@
             スーパー候補
         `);
 
+        // スーパーマーケット
+        L.marker(
+            [52.67520468753453, -8.674791113960339],
+            { icon: supermarketIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Tesco</b><br>
+            スーパーマーケット<br>
+            8:00 - 22:00<br>
+            <i class="fa-solid fa-car"></i> 車 5分
+        `);
+
+        L.marker(
+            [52.6784841962892, -8.637864137222943],
+            { icon: supermarketIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Tesco</b><br>
+            スーパーマーケット<br>
+            日曜以外 8:00 - 22:00<br>
+            日曜　　 9:00 - 21:00<br>
+            <i class="fa-solid fa-car"></i> 車 6分
+        `);
+        
+        L.marker(
+            [52.67233805458714, -8.66274298322991],
+            { icon: supermarketIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>MACE</b><br>
+            スーパーマーケット<br>
+            8:00 - 22:00<br>
+            <i class="fa-solid fa-car"></i> 車 5分
+        `);
+        
+        L.marker(
+            [52.67124765496133, -8.659432302888716],
+            { icon: supermarketIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Lidl</b><br>
+            スーパーマーケット<br>
+            日曜以外 8:00 - 22:00<br>
+            日曜　　 9:00 - 21:00<br>
+            <i class="fa-solid fa-car"></i> 車 7分
+        `);
+
+        L.marker(
+            [52.67124765496133, -8.659432302888716],
+            { icon: shoppingcentreIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Jetland Shopping Centre</b><br>
+            ショッピングモール<br>
+            日曜以外 8:00 - 22:00<br>
+            日曜　　 9:00 - 21:00<br>
+            <i class="fa-solid fa-car"></i> 車 6分
+        `);
+
+         L.marker(
+            [52.67941247530736, -8.660868938198616],
+            { icon: convenienceIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Spar</b><br>
+            コンビニ<br>
+            平日 7:00 - 22:00<br>
+            休日 8:00 - 22:00<br>
+            <i class="fa-solid fa-car"></i> 車 2分<br>
+            <i class="fa-solid fa-person-running"></i>徒歩 7分
+        `);
+
+        L.marker(
+            [52.67571407629599, -8.652119310319476],
+            { icon: convenienceIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Centre Woodview</b><br>
+            コンビニ<br>
+            平日 7:00 - 21:00<br>
+            土曜 8:00 - 21:00<br>
+            日曜 9:00 - 21:00<br>
+            <i class="fa-solid fa-car"></i> 車 3分
+        `);
+        
         L.marker(
             [52.6798, -8.6572],
             { icon: cafeIcon }

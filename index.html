@@ -4,58 +4,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limerick Living Map</title>
 
-    <title>Limerick Map</title>
-
+    <!-- 自分のCSS -->
     <link rel="stylesheet" href="index.css">
 
-    <!-- Leaflet -->
+    <!-- Leaflet CSS -->
     <link rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-    <!-- Font Awesome -->
+    <!-- Font Awesome CSS -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
 </head>
 
 <body>
 
-<div id="map"></div>
+    <!-- 地図表示エリア。必ずbodyの中に置く -->
+    <div id="map"></div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script>
+    <script>
+        // CSS変数からアイコンサイズを取得
+        const rootStyle = getComputedStyle(document.documentElement);
+        const iconSize = parseInt(rootStyle.getPropertyValue('--marker-size'));
 
-const map = L.map('map').setView(
-    [52.682556, -8.659160],
-    15
-);
+        // 地図をThomond Student Village中心に表示
+        const map = L.map('map').setView(
+            [52.682556, -8.659160],
+            15
+        );
 
-L.tileLayer(
-    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-        attribution: '&copy; OpenStreetMap contributors'
-    }
-).addTo(map);
+        // OpenStreetMapの地図タイル
+        L.tileLayer(
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                attribution: '&copy; OpenStreetMap contributors'
+            }
+        ).addTo(map);
 
-const homeIcon = L.divIcon({
-    html: '<i class="fa-solid fa-house"></i>',
-    className: 'home-icon',
-    iconSize: [80, 80],
-    iconAnchor: [40, 80]
-});
+        // Font Awesomeアイコンを作る関数
+        function createIcon(iconClass, cssClass) {
+            return L.divIcon({
+                html: `<i class="${iconClass}"></i>`,
+                className: cssClass,
+                iconSize: [iconSize, iconSize],
+                iconAnchor: [iconSize / 2, iconSize],
+                popupAnchor: [0, -iconSize]
+            });
+        }
 
-L.marker(
-    [52.682556, -8.659160],
-    {
-        icon: homeIcon
-    }
-)
-.addTo(map)
-.bindPopup('Thomond Student Village');
+        // アイコン定義
+        const homeIcon = createIcon(
+            'fa-solid fa-house',
+            'map-icon home-icon'
+        );
 
-</script>
+        const supermarketIcon = createIcon(
+            'fa-solid fa-cart-shopping',
+            'map-icon supermarket-icon'
+        );
+
+        const cafeIcon = createIcon(
+            'fa-solid fa-mug-hot',
+            'map-icon cafe-icon'
+        );
+
+        const restaurantIcon = createIcon(
+            'fa-solid fa-utensils',
+            'map-icon restaurant-icon'
+        );
+
+        const pubIcon = createIcon(
+            'fa-solid fa-beer-mug-empty',
+            'map-icon pub-icon'
+        );
+
+        // Thomond Student Village
+        L.marker(
+            [52.682556, -8.659160],
+            { icon: homeIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Thomond Student Village</b><br>
+            生活拠点
+        `);
+
+        // 以下はサンプル位置。実際の店の座標に後で置き換える
+        L.marker(
+            [52.6816, -8.6558],
+            { icon: supermarketIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Supermarket Sample</b><br>
+            スーパー候補
+        `);
+
+        L.marker(
+            [52.6798, -8.6572],
+            { icon: cafeIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Cafe Sample</b><br>
+            カフェ候補
+        `);
+
+        L.marker(
+            [52.6840, -8.6620],
+            { icon: restaurantIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Restaurant Sample</b><br>
+            レストラン候補
+        `);
+
+        L.marker(
+            [52.6860, -8.6600],
+            { icon: pubIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Pub Sample</b><br>
+            パブ候補
+        `);
+    </script>
 
 </body>
 

@@ -34,10 +34,11 @@
     ).addTo(map);
 
     const homeIcon = L.divIcon({
-        html: '🏠',
+        iconUrl: 'home.svg',
         className: 'home-icon',
-        iconSize: [48, 48],
-        iconAnchor: [32,32]
+        iconSize: [50, 50],
+        iconAnchor: [25,50],
+        popupAnchor: [0, -50]
     });
 
     L.marker(

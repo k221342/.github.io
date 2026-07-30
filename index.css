@@ -1,7 +1,8 @@
 :root {
     --marker-size: 32;
-    --home-color: #1976d2;
+    --home-color: #000000;
     --supermarket-color: #ffa500;
+    --pharmacy-color: #0000ff;
     --cafe-color: #8d6e63;
     --restaurant-color: #d84315;
     --pub-color: #6a1b9a;
@@ -62,6 +63,11 @@ body {
 /* コンビニ */
 .convenience-icon i {
     color: var(--supermarket-color);
+}
+
+/* ドラッグストア */
+.pharmacy-icon i {
+    color: var(--pharmacy-color);
 }
 
 /* カフェ */

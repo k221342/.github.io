@@ -5,6 +5,7 @@
     --cafe-color: #8d6e63;
     --restaurant-color: #d84315;
     --pub-color: #6a1b9a;
+    --park-color: #2e7d32;
 }
 
 html,
@@ -66,6 +67,11 @@ body {
 /* パブ */
 .pub-icon i {
     color: var(--pub-color);
+}
+
+/* 公園 */
+.park-icon i {
+    color: var(--park-color);
 }
 
 /* ポップアップ */

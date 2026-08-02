@@ -1,0 +1,43 @@
+body{
+    margin:0;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#f5f7fa;
+    font-family:sans-serif;
+}
+
+.hero{
+    text-align:center;
+}
+
+h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+p{
+    margin-bottom:30px;
+}
+
+.btn{
+    display:inline-block;
+
+    background:#0078ff;
+    color:white;
+
+    text-decoration:none;
+
+    padding:15px 30px;
+
+    border-radius:10px;
+
+    font-size:1.1rem;
+}
+
+.btn:hover{
+    background:#005fd1;
+}

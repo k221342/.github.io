@@ -1,16 +1,16 @@
 body{
+
     margin:0;
     height:100vh;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background-image:url("images/wucc2026-background.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 
-    background-image: url("images/wucc2026-background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     font-family:sans-serif;
+
+    position:relative;
 }
 
 body::before{
@@ -23,6 +23,15 @@ body::before{
 }
 
 .hero{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:8%;
+
+    transform:translateX(-50%);
+
     text-align:center;
 }
 
@@ -42,21 +51,82 @@ p{
     flex-wrap: wrap;
 }
 
-.btn{
-    display:inline-block;
+.menu-card{
 
-    background:#0078ff;
-    color:white;
+    width:180px;
+
+    padding:20px;
+
+    background:rgba(255,255,255,0.92);
+
+    border-radius:24px;
 
     text-decoration:none;
 
-    padding:15px 30px;
+    color:#14532d;
 
-    border-radius:10px;
+    text-align:center;
+
+    backdrop-filter:blur(8px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.20);
+
+    transition:all 0.2s ease;
+}
+
+.menu-card:hover{
+
+    transform:
+        translateY(-5px)
+        scale(1.03);
+
+    background:white;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.25);
+}
+
+.menu-icon{
+
+    font-size:3rem;
+
+    margin-bottom:10px;
+}
+
+.menu-title{
 
     font-size:1.1rem;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    margin-bottom:8px;
 }
 
-.btn:hover{
-    background:#005fd1;
+.menu-desc{
+
+    font-size:0.9rem;
+
+    color:#666;
 }
+
+@media (max-width:768px){
+
+    .button-group{
+
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:18px;
+    }
+
+    .menu-card{
+
+        width:260px;
+    }
+
+}
+

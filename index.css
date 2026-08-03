@@ -114,19 +114,24 @@ p{
 
 @media (max-width:768px){
 
-    .button-group{
+    .hero{
+
+        display:flex;
 
         flex-direction:column;
 
         align-items:center;
 
-        gap:18px;
+        gap:15px;
+
+        width:100%;
     }
 
-    .menu-card{
+    .btn{
 
-        width:260px;
+        width:280px;
+
+        background:rgba(255,255,255,0.95);
     }
-
 }
 

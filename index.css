@@ -6,11 +6,10 @@ body{
     justify-content:center;
     align-items:center;
 
-    background-image: "wucc2026-background.jpg";
+    background-image: url("wucc2026-background.jpg");
     background-size: cover;
-    background-position: ceter;
+    background-position: center;
     background-repeat: no-repeat;
-    background:#f5f7fa;
     font-family:sans-serif;
 }
 

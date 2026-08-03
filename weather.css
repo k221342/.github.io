@@ -2,87 +2,77 @@
     box-sizing:border-box;
 }
 
-bo*y{
-
+body{
     margin:0;
-    padding:30px*
+    padding:30px;
 
     min-height:100vh;
 
-    backg*ound:
+    background:
         linear-gradient(
-   *        135deg,
-            #d8ecf*,
+            135deg,
+            #d8ecff,
             #eef5ff
         );
 
-*   font-family:
-        "Segoe UI"*
+    font-family:
+        "Segoe UI",
         "Yu Gothic",
-        sans*serif;
+        sans-serif;
 }
 
 .container{
-
-    max-wid*h:1400px;
-
+    max-width:1400px;
     margin:auto;
 }
 
 .header{
-
     text-align:center;
-
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
 .header h1{
-
     color:#1d6fd7;
-
-    margin-bottom:8px;
+    margin-bottom:10px;
 }
 
 .header p{
-
-    color:*666;
+    color:#666;
 }
 
+/* 横スクロール */
 .weather-grid{
-
     display:flex;
 
     gap:16px;
 
     overflow-x:auto;
-
     overflow-y:hidden;
 
-    padding:10px 0 20px 0;
+    padding:10px 0 25px 0;
 
     scroll-behavior:smooth;
 }
-.weather-grid::-webkit-scrollbar{
 
+/* スクロールバー */
+.weather-grid::-webkit-scrollbar{
     height:10px;
 }
 
 .weather-grid::-webkit-scrollbar-track{
-
     background:#dce7f5;
-
     border-radius:20px;
 }
 
 .weather-grid::-webkit-scrollbar-thumb{
-
     background:#4b8cff;
-
     border-radius:20px;
 }
+
+/* 天気カード */
 .weather-card{
 
-    flex:0 0 180px;
+    flex:0 0 220px;
 
     background:white;
 
@@ -93,67 +83,89 @@ bo*y{
     text-align:center;
 
     box-shadow:
-        0 4px 12px rgba(0,0,0,0.08);
+        0 6px 18px rgba(0,0,0,0.08);
+
+    transition:0.2s;
+}
+
+.weather-card:hover{
+    transform:translateY(-3px);
+}
+
+/* 今日を強調 */
+.weather-card.today{
+
+    border:3px solid #1d6fd7;
+
+    background:#eef5ff;
 }
 
 .date{
-
     font-weight:bold;
-
     font-size:1.1rem;
-
     margin-bottom:10px;
 }
 
 .icon{
-
     font-size:3rem;
-
     margin-bottom:10px;
 }
-.w*ather{
 
+.weather{
     margin-bottom:15px;
-
- *  color:#444;
+    color:#444;
 }
 
 .temp{
-
     font-size:1.8rem;
-
     font-weight:bold;
-
     color:#f57c00;
 }
 
 .temp-min{
-
     color:#1d6fd7;
-
     font-size:1rem;
 }
 
 .loading{
-
- *  text-align:center;
-
-    grid-col*mn:1/-1;
-
+    text-align:center;
     padding:50px;
 }
 
-.ho*e-link{
+/* Homeボタン */
+
+.home-link{
 
     display:block;
 
-    m*rgin-top:40px;
+    margin-top:40px;
 
-    text-align:cen*er;
+    text-align:center;
 
     text-decoration:none;
 
-  * font-weight:bold;
+    font-weight:bold;
 
-    color:#1d6*d7;
+    color:#1d6fd7;
+}
+
+/* スマホ */
+
+@media (max-width:600px){
+
+    body{
+        padding:15px;
+    }
+
+    .weather-card{
+        flex:0 0 180px;
+    }
+
+    .icon{
+        font-size:2.5rem;
+    }
+
+    .temp{
+        font-size:1.5rem;
+    }
 }

@@ -6,7 +6,7 @@ body{
     justify-content:center;
     align-items:center;
 
-    background-image: url("wucc2026-background.jpg");
+    background-image: "wucc2026-background.jpg";
     background-size: cover;
     background-position: ceter;
     background-repeat: no-repeat;

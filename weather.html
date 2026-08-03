@@ -4,13 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Weather</title>
 
     <link rel="stylesheet" href="weather.css">
-    
-    <link rel="stylesheet"
-        href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"">
 </head>
 
 <body>
@@ -20,12 +16,12 @@
         <div class="header">
 
             <h1>
-                🇮🇪Limerick Weather
+                🇮🇪 Limerick Weather
             </h1>
+
         </div>
 
-        <div id="weatherGrid"
-             class="weather-grid">
+        <div id="weatherGrid" class="weather-grid">
 
             <div class="loading">
                 天気情報を取得中...
@@ -33,8 +29,7 @@
 
         </div>
 
-        <a href="index.html"
-           class="home-link">
+        <a href="index.html" class="home-link">
             ← Homeへ戻る
         </a>
 
@@ -47,24 +42,34 @@
 
         const weatherCodeMap = {
 
-            0: ["☀️", "快晴"],
-            1: ["🌤️", "晴れ"],
-            2: ["⛅", "一部曇り"],
-            3: ["☁️", "曇り"],
-            45: ["🌫️", "霧"],
-            48: ["🌫️", "霧"],
-            51: ["🌦️", "小雨"],
-            53: ["🌦️", "雨"],
-            55: ["🌧️", "強雨"],
-            61: ["🌧️", "雨"],
-            63: ["🌧️", "雨"],
-            65: ["🌧️", "大雨"],
-            71: ["❄️", "雪"],
-            80: ["🌦️", "にわか雨"],
-            81: ["🌧️", "雨"],
-            82: ["🌧️", "大雨"],
-            95: ["⛈️", "雷雨"]
+            0: ["☀️", "Clear"],
+            1: ["🌤️", "Mainly Clear"],
+            2: ["⛅", "Partly Cloudy"],
+            3: ["☁️", "Cloudy"],
+            45: ["🌫️", "Fog"],
+            48: ["🌫️", "Fog"],
+            51: ["🌦️", "Drizzle"],
+            53: ["🌦️", "Rain"],
+            55: ["🌧️", "Heavy Rain"],
+            61: ["🌧️", "Rain"],
+            63: ["🌧️", "Rain"],
+            65: ["🌧️", "Heavy Rain"],
+            71: ["❄️", "Snow"],
+            80: ["🌦️", "Showers"],
+            81: ["🌧️", "Rain"],
+            82: ["🌧️", "Heavy Rain"],
+            95: ["⛈️", "Thunderstorm"]
         };
+
+        const weekdays = [
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat"
+        ];
 
         async function loadWeather() {
 
@@ -73,6 +78,7 @@
                 "?latitude=" + LATITUDE +
                 "&longitude=" + LONGITUDE +
                 "&daily=weather_code,temperature_2m_max,temperature_2m_min" +
+                "&hourly=weather_code,wind_speed_10m" +
                 "&timezone=auto";
 
             const response = await fetch(url);
@@ -93,15 +99,76 @@
             const minTemps =
                 data.daily.temperature_2m_min;
 
-            const weatherCodes =
-                data.daily.weather_code;
+            const hourlyTimes =
+                data.hourly.time;
 
-            for (let i = 0; i < dates.length; i++) {
+            const hourlyCodes =
+                data.hourly.weather_code;
 
-                const weather =
+            const hourlyWind =
+                data.hourly.wind_speed_10m;
+
+            function getHourlyIcon(date, hour) {
+
+                const target =
+                    `${date}T${hour}:00`;
+
+                const index =
+                    hourlyTimes.indexOf(target);
+
+                if(index < 0){
+                    return "❓";
+                }
+
+                return (
                     weatherCodeMap[
-                        weatherCodes[i]
-                    ] || ["❓", "不明"];
+                        hourlyCodes[index]
+                    ] || ["❓"]
+                )[0];
+            }
+
+            function getHourlyWind(date, hour){
+
+                const target =
+                    `${date}T${hour}:00`;
+
+                const index =
+                    hourlyTimes.indexOf(target);
+
+                if(index < 0){
+                    return "-";
+                }
+
+                return Math.round(
+                    hourlyWind[index]
+                );
+            }
+
+            for(let i=0;i<dates.length;i++){
+
+                const d =
+                    new Date(dates[i]);
+
+                const formattedDate =
+                    `${d.getMonth()+1}/${d.getDate()} (${weekdays[d.getDay()]})`;
+
+                const icon06 =
+                    getHourlyIcon(dates[i],"06");
+
+                const icon09 =
+                    getHourlyIcon(dates[i],"09");
+
+                const icon12 =
+                    getHourlyIcon(dates[i],"12");
+
+                const icon15 =
+                    getHourlyIcon(dates[i],"15");
+
+                const icon18 =
+                    getHourlyIcon(dates[i],"18");
+
+                const windSpeed =
+                    getHourlyWind(dates[i],"12");
 
                 const card =
                     document.createElement("div");
@@ -109,52 +176,62 @@
                 card.className =
                     "weather-card";
 
-                if (i === 0) {
+                if(i === 0){
                     card.classList.add("today");
                 }
 
                 card.innerHTML = `
+
                     <div class="date">
                         ${formattedDate}
                     </div>
 
                     <div class="timeline">
+
                         <div class="time-slot">
                             <span class="time">06</span>
                             <span class="emoji">${icon06}</span>
                         </div>
+
                         <div class="time-slot">
                             <span class="time">09</span>
                             <span class="emoji">${icon09}</span>
                         </div>
+
                         <div class="time-slot">
                             <span class="time">12</span>
                             <span class="emoji">${icon12}</span>
                         </div>
+
                         <div class="time-slot">
                             <span class="time">15</span>
                             <span class="emoji">${icon15}</span>
                         </div>
+
                         <div class="time-slot">
                             <span class="time">18</span>
                             <span class="emoji">${icon18}</span>
                         </div>
-                    </div>
-                    <div class="temps">
-                        <div class="max-temp">
-                            ↑ ${maxTemps[i]}℃
-                        </div>
-                        <div class="min-temp">
-                            ↓ ${minTemps[i]}℃
-                        </div>
-                    </div>
-                
-                    <div class="wind">
-                        💨 ${windSpeed} m/s
-                    </div>
-                
-                `;
 
+                    </div>
+
+                    <div class="temps">
+
+                        <div class="max-temp">
+                            ↑ ${Math.round(maxTemps[i])}℃
+                        </div>
+
+                        <div class="min-temp">
+                            ↓ ${Math.round(minTemps[i])}℃
+                        </div>
+
+                    </div>
+
+                    <div class="wind">
+                        💨 ${windSpeed} km/h
+                    </div>
+
+                `;
 
                 grid.appendChild(card);
             }

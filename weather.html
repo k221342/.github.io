@@ -114,28 +114,47 @@
                 }
 
                 card.innerHTML = `
-
                     <div class="date">
-                        ${dates[i]}
+                        ${formattedDate}
                     </div>
 
-                    <div class="icon">
-                        ${weather[0]}
+                    <div class="timeline">
+                        <div class="time-slot">
+                            <span class="time">06</span>
+                            <span class="emoji">${icon06}</span>
+                        </div>
+                        <div class="time-slot">
+                            <span class="time">09</span>
+                            <span class="emoji">${icon09}</span>
+                        </div>
+                        <div class="time-slot">
+                            <span class="time">12</span>
+                            <span class="emoji">${icon12}</span>
+                        </div>
+                        <div class="time-slot">
+                            <span class="time">15</span>
+                            <span class="emoji">${icon15}</span>
+                        </div>
+                        <div class="time-slot">
+                            <span class="time">18</span>
+                            <span class="emoji">${icon18}</span>
+                        </div>
                     </div>
-
-                    <div class="weather">
-                        ${weather[1]}
+                    <div class="temps">
+                        <div class="max-temp">
+                            ↑ ${maxTemps[i]}℃
+                        </div>
+                        <div class="min-temp">
+                            ↓ ${minTemps[i]}℃
+                        </div>
                     </div>
-
-                    <div class="temp">
-                        ${maxTemps[i]}℃
+                
+                    <div class="wind">
+                        💨 ${windSpeed} m/s
                     </div>
-
-                    <div class="temp-min">
-                        ${minTemps[i]}℃
-                    </div>
-
+                
                 `;
+
 
                 grid.appendChild(card);
             }

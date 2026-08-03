@@ -7,6 +7,7 @@
     --restaurant-color: #f4a460;
     --gs-color: #ff0000;
     --park-color: #2e7d32;
+    --field-color: #2e7d32;
 }
 
 html,
@@ -101,6 +102,11 @@ body {
 
 /* 公園 */
 .park-icon i {
+    color: var(--park-color);
+}
+
+/* 会場 */
+.field-icon i {
     color: var(--park-color);
 }
 

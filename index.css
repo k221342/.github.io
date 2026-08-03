@@ -6,8 +6,21 @@ body{
     justify-content:center;
     align-items:center;
 
+    background-image: url("wucc2026-background.jpg");
+    background-size: cover;
+    background-position: ceter;
+    background-repeat: no-repeat;
     background:#f5f7fa;
     font-family:sans-serif;
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+
+    z-index: -1;
 }
 
 .hero{

@@ -140,8 +140,8 @@
                 }
 
                 return Math.round(
-                    hourlyWind[index]
-                );
+                    hourlyWind[index] / 3.6
+                ).toFixed(1);
             }
 
             for(let i=0;i<dates.length;i++){
@@ -228,7 +228,7 @@
                     </div>
 
                     <div class="wind">
-                        💨 ${windSpeed} km/h
+                        💨 ${windSpeed} m/s
                     </div>
 
                 `;

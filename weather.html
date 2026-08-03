@@ -4,18 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>WUCC Weather</title>
 
-    <link rel="stylesheet" href="weather.css>
+    <link rel="stylesheet"://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css
+</head>
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min"container">
+<body>
+
+    <div class="container">
 
         <div class="header">
 
             <h1>
-                天気
+                🇮🇪 Limerick Weather
             </h1>
+
+            <p>
+                Thomond Student Village周辺
+            </p>
+
         </div>
 
         <div id="weatherGrid"
@@ -27,117 +35,118 @@
 
         </div>
 
-        <a href="index.html" class="home-link">
+        <a href="index.html"
+           class="home-link">
             ← Homeへ戻る
         </a>
 
     </div>
 
-<script>
+    <script>
 
-const LATITUDE = 52.682556;
-const LONGITUDE = -8.659160;
+        const LATITUDE = 52.682556;
+        const LONGITUDE = -8.659160;
 
-const weatherCodeMap = {
+        const weatherCodeMap = {
 
-    0:  ["☀️", "快晴"],
-    1:  ["🌤️", "晴れ"],
-    2:  ["⛅", "一部曇り"],
-    3:  ["☁️", "曇り"],
-    45: ["🌫️", "霧"],
-    48: ["🌫️", "霧"],
-    51: ["🌦️", "小雨"],
-    53: ["🌦️", "雨"],
-    55: ["🌧️", "強雨"],
-    61: ["🌧️", "雨"],
-    63: ["🌧️", "雨"],
-    65: ["🌧️", "大雨"],
-    71: ["❄️", "雪"],
-    80: ["🌦️", "にわか雨"],
-    81: ["🌧️", "雨"],
-    82: ["🌧️", "大雨"],
-    95: ["⛈️", "雷雨"]
-};
+            0: ["☀️", "快晴"],
+            1: ["🌤️", "晴れ"],
+            2: ["⛅", "一部曇り"],
+            3: ["☁️", "曇り"],
+            45: ["🌫️", "霧"],
+            48: ["🌫️", "霧"],
+            51: ["🌦️", "小雨"],
+            53: ["🌦️", "雨"],
+            55: ["🌧️", "強雨"],
+            61: ["🌧️", "雨"],
+            63: ["🌧️", "雨"],
+            65: ["🌧️", "大雨"],
+            71: ["❄️", "雪"],
+            80: ["🌦️", "にわか雨"],
+            81: ["🌧️", "雨"],
+            82: ["🌧️", "大雨"],
+            95: ["⛈️", "雷雨"]
+        };
 
-async function loadWeather(){
+        async function loadWeather() {
 
-    const url =
-        "https://api.open-meteo.com/v1/forecast"
-        + "?latitude=" + LATITUDE
-        + "&longitude=" + LONGITUDE
-        + "&daily=weathercode,temperature_2m_max,temperature_2m_min"
-        + "&timezone=auto";
+            const url =
+                "https://api.open-meteo.com/v1/forecast" +
+                "?latitude=" + LATITUDE +
+                "&longitude=" + LONGITUDE +
+                "&daily=weather_code,temperature_2m_max,temperature_2m_min" +
+                "&timezone=auto";
 
-    const response = await fetch(url);
+            const response = await fetch(url);
 
-    const data = await response.json();
+            const data = await response.json();
 
-    const grid =
-        document.getElementById("weatherGrid");
+            const grid =
+                document.getElementById("weatherGrid");
 
-    grid.innerHTML = "";
+            grid.innerHTML = "";
 
-    const dates =
-        data.daily.time;
+            const dates =
+                data.daily.time;
 
-    const maxTemps =
-        data.daily.temperature_2m_max;
+            const maxTemps =
+                data.daily.temperature_2m_max;
 
-    const minTemps =
-        data.daily.temperature_2m_min;
+            const minTemps =
+                data.daily.temperature_2m_min;
 
-    const weatherCodes =
-        data.daily.weathercode;
+            const weatherCodes =
+                data.daily.weather_code;
 
-    for(let i=0;i<dates.length;i++){
+            for (let i = 0; i < dates.length; i++) {
 
-        const weather =
-            weatherCodeMap[
-                weatherCodes[i]
-            ] || ["❓","不明"];
+                const weather =
+                    weatherCodeMap[
+                        weatherCodes[i]
+                    ] || ["❓", "不明"];
 
-        const card =
-            document.createElement("div");
+                const card =
+                    document.createElement("div");
 
-        card.className =
-            "weather-card";
+                card.className =
+                    "weather-card";
 
-        if(i === 0){
-            card.classList.add("today");
+                if (i === 0) {
+                    card.classList.add("today");
+                }
+
+                card.innerHTML = `
+
+                    <div class="date">
+                        ${dates[i]}
+                    </div>
+
+                    <div class="icon">
+                        ${weather[0]}
+                    </div>
+
+                    <div class="weather">
+                        ${weather[1]}
+                    </div>
+
+                    <div class="temp">
+                        ${maxTemps[i]}℃
+                    </div>
+
+                    <div class="temp-min">
+                        ${minTemps[i]}℃
+                    </div>
+
+                `;
+
+                grid.appendChild(card);
+            }
         }
 
+        loadWeather();
 
-        card.innerHTML = `
-
-            <div class="date">
-                ${dates[i]}
-            </div>
-
-            <div class="icon">
-                ${weather[0]}
-            </div>
-
-            <div class="weather">
-                ${weather[1]}
-            </div>
-
-            <div class="temp">
-                ${maxTemps[i]}℃
-            </div>
-
-            <div class="temp-min">
-                ${minTemps[i]}℃
-            </div>
-
-        `;
-
-        grid.appendChild(card);
-    }
-}
-
-loadWeather();
-
-</script>
+    </script>
 
 </body>
+
 </html>

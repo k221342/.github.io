@@ -4,7 +4,7 @@
 
 body{
     margin:0;
-    padding:30px;
+    padding:20px;
 
     min-height:100vh;
 
@@ -28,28 +28,26 @@ body{
 
 .header{
     text-align:center;
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
 .header h1{
     color:#1d6fd7;
-    margin-bottom:10px;
-}
-
-.header p{
-    color:#666;
+    margin:0;
 }
 
 /* 横スクロール */
 .weather-grid{
+
     display:flex;
 
-    gap:16px;
+    gap:18px;
 
     overflow-x:auto;
+
     overflow-y:hidden;
 
-    padding:10px 0 25px 0;
+    padding-bottom:16px;
 
     scroll-behavior:smooth;
 }
@@ -69,23 +67,29 @@ body{
     border-radius:20px;
 }
 
-/* 天気カード */
+/* カード */
+
 .weather-card{
 
-    flex:0 0 280px;
+    flex:0 0 320px;
 
     background:white;
 
-    border-radius:20px;
+    border-radius:22px;
 
     padding:18px;
 
-    text-align:center;
-
     box-shadow:
-        0 6px 18px rgba(0,0,0,0.08);
+        0 8px 20px rgba(0,0,0,0.08);
 
     border:3px solid transparent;
+
+    transition:0.2s;
+}
+
+.weather-card:hover{
+
+    transform:translateY(-3px);
 }
 
 .weather-card.today{
@@ -95,14 +99,21 @@ body{
     background:#eef5ff;
 }
 
+/* 日付 */
+
 .date{
+
+    text-align:center;
 
     font-size:1.1rem;
 
     font-weight:bold;
 
-    margin-bottom:15px;
+    margin-bottom:16px;
 }
+
+/* 時間帯 */
+
 .timeline{
 
     display:grid;
@@ -112,7 +123,7 @@ body{
 
     gap:8px;
 
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
 
 .time-slot{
@@ -126,7 +137,7 @@ body{
 
 .time{
 
-    font-size:0.85rem;
+    font-size:0.8rem;
 
     color:#666;
 
@@ -135,22 +146,10 @@ body{
 
 .emoji{
 
-    font-size:1.3rem;
+    font-size:1.4rem;
 }
 
-.weather-card:hover{
-    transform:translateY(-3px);
-}
-
-.icon{
-    font-size:3rem;
-    margin-bottom:10px;
-}
-
-.weather{
-    margin-bottom:15px;
-    color:#444;
-}
+/* 温度 */
 
 .temps{
 
@@ -158,48 +157,65 @@ body{
 
     justify-content:space-between;
 
-    margin-top:15px;
+    margin-top:10px;
 }
 
 .max-temp{
 
-    font-size:1.1rem;
+    color:#f57c00;
 
     font-weight:bold;
 
-    color:#f57c00;
+    font-size:1.1rem;
 }
 
 .min-temp{
 
-    font-size:1.1rem;
+    color:#1d6fd7;
 
     font-weight:bold;
 
-    color:#1d6fd7;
+    font-size:1.1rem;
 }
+
+/* 風速 */
+
 .wind{
 
     margin-top:12px;
 
-    color:#666;
+    text-align:center;
+
+    color:#555;
 
     font-size:0.95rem;
 }
 
+/* 補助情報 */
 
-.loading{
+.weather{
+
     text-align:center;
-    padding:50px;
+
+    margin-top:10px;
+
+    color:#666;
 }
 
-/* Homeボタン */
+.loading{
+
+    padding:50px;
+
+    text-align:center;
+}
+
+/* Homeへ戻る */
 
 .home-link{
 
     display:block;
 
-    margin-top:40px;
+    margin-top:30px;
 
     text-align:center;
 
@@ -212,21 +228,29 @@ body{
 
 /* スマホ */
 
-@media (max-width:600px){
+@media (max-width:768px){
 
     body{
-        padding:15px;
+        padding:12px;
     }
 
     .weather-card{
-        flex:0 0 180px;
+
+        flex:0 0 280px;
     }
 
-    .icon{
-        font-size:2.5rem;
+    .timeline{
+
+        gap:4px;
     }
 
-    .temp{
-        font-size:1.5rem;
+    .emoji{
+
+        font-size:1.2rem;
+    }
+
+    .date{
+
+        font-size:1rem;
     }
 }

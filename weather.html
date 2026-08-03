@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WUCC Weather</title>
+
+    <linker.css
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min"container">
+
+        <div class="header">
+
+            <h1>
+                🇮🇪 Limerick Weather
+            </h1>
+
+            <p>
+                Thomond Student Village周辺
+            </p>
+
+        </div>
+
+        <div id="weatherGrid"
+             class="weather-grid">
+
+            <div class="loading">
+                天気情報を取得中...
+            </div>
+
+        </div>
+
+        <a href="index.html" class="home-link">
+            ← Homeへ戻る
+        </a>
+
+    </div>
+
+<script>
+
+const LATITUDE = 52.682556;
+const LONGITUDE = -8.659160;
+
+const weatherCodeMap = {
+
+    0:  ["☀️", "快晴"],
+    1:  ["🌤️", "晴れ"],
+    2:  ["⛅", "一部曇り"],
+    3:  ["☁️", "曇り"],
+    45: ["🌫️", "霧"],
+    48: ["🌫️", "霧"],
+    51: ["🌦️", "小雨"],
+    53: ["🌦️", "雨"],
+    55: ["🌧️", "強雨"],
+    61: ["🌧️", "雨"],
+    63: ["🌧️", "雨"],
+    65: ["🌧️", "大雨"],
+    71: ["❄️", "雪"],
+    80: ["🌦️", "にわか雨"],
+    81: ["🌧️", "雨"],
+    82: ["🌧️", "大雨"],
+    95: ["⛈️", "雷雨"]
+};
+
+async function loadWeather(){
+
+    const url =
+        "https://api.open-meteo.com/v1/forecast"
+        + "?latitude=" + LATITUDE
+        + "&longitude=" + LONGITUDE
+        + "&daily=weathercode,temperature_2m_max,temperature_2m_min"
+        + "&timezone=auto";
+
+    const response = await fetch(url);
+
+    const data = await response.json();
+
+    const grid =
+        document.getElementById("weatherGrid");
+
+    grid.innerHTML = "";
+
+    const dates =
+        data.daily.time;
+
+    const maxTemps =
+        data.daily.temperature_2m_max;
+
+    const minTemps =
+        data.daily.temperature_2m_min;
+
+    const weatherCodes =
+        data.daily.weathercode;
+
+    for(let i=0;i<dates.length;i++){
+
+        const weather =
+            weatherCodeMap[
+                weatherCodes[i]
+            ] || ["❓","不明"];
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "weather-card";
+
+        card.innerHTML = `
+
+            <div class="date">
+                ${dates[i]}
+            </div>
+
+            <div class="icon">
+                ${weather[0]}
+            </div>
+
+            <div class="weather">
+                ${weather[1]}
+            </div>
+
+            <div class="temp">
+                ${maxTemps[i]}℃
+            </div>
+
+            <div class="temp-min">
+                ${minTemps[i]}℃
+            </div>
+
+        `;
+
+        grid.appendChild(card);
+    }
+}
+
+loadWeather();
+
+</script>
+
+</body>
+</html>

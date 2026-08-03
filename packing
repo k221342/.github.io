@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>持ち物リスト</title>
+
+    packing.css
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🎒 持ち物リスト</h1>
+
+        <div class="add-area">
+            <input
+                type="text"
+                id="itemInput"
+                placeholder="持ち物を入力">
+
+            <button id="addButton">
+                追加
+            </button>
+        </div>
+
+        <ul id="checklist"></ul>
+
+        <button id="clearButton" class="danger">
+            全チェック解除
+        </button>
+
+        <br><br>
+
+        <a href="index.html" class="home-link">
+            ← Homeへ戻る
+        </a>
+
+    </div>
+
+    <script>
+
+        const STORAGE_KEY = "packingList";
+
+        let items = JSON.parse(
+            localStorage.getItem(STORAGE_KEY)
+        ) || [
+            { text: "パスポート", checked: false },
+            { text: "VISA", checked: false },
+            { text: "航空券", checked: false },
+            { text: "SIMカード", checked: false },
+            { text: "充電器", checked: false }
+        ];
+
+        function saveItems() {
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(items)
+            );
+        }
+
+        function renderList() {
+
+            const list =
+                document.getElementById("checklist");
+
+            list.innerHTML = "";
+
+            items.forEach((item, index) => {
+
+                const li =
+                    document.createElement("li");
+
+                li.innerHTML = `
+                    <label>
+                        <input
+                            type="checkbox"
+                            ${item.checked ? "checked" : ""}
+                            onchange="toggleItem(${index})">
+                        ${item.text}
+                    </label>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteItem(${index})">
+                        ✕
+                    </button>
+                `;
+
+                list.appendChild(li);
+            });
+        }
+
+        function toggleItem(index) {
+
+            items[index].checked =
+                !items[index].checked;
+
+            saveItems();
+        }
+
+        function deleteItem(index) {
+
+            items.splice(index, 1);
+
+            saveItems();
+            renderList();
+        }
+
+        document
+            .getElementById("addButton")
+            .addEventListener("click", () => {
+
+                const input =
+                    document.getElementById("itemInput");
+
+                const text =
+                    input.value.trim();
+
+                if (text === "") {
+                    return;
+                }
+
+                items.push({
+                    text: text,
+                    checked: false
+                });
+
+                saveItems();
+                renderList();
+
+                input.value = "";
+            });
+
+        document
+            .getElementById("itemInput")
+            .addEventListener("keydown", (e) => {
+
+                if (e.key === "Enter") {
+                    document
+                        .getElementById("addButton")
+                        .click();
+                }
+            });
+
+        document
+            .getElementById("clearButton")
+            .addEventListener("click", () => {
+
+                items.forEach(item => {
+                    item.checked = false;
+                });
+
+                saveItems();
+                renderList();
+            });
+
+        renderList();
+
+    </script>
+
+</body>
+
+</html>

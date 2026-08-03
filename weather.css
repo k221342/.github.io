@@ -1,0 +1,129 @@
+*{
+    box-sizing:border-box;
+}
+
+bo*y{
+
+    margin:0;
+    padding:30px*
+
+    min-height:100vh;
+
+    backg*ound:
+        linear-gradient(
+   *        135deg,
+            #d8ecf*,
+            #eef5ff
+        );
+
+*   font-family:
+        "Segoe UI"*
+        "Yu Gothic",
+        sans*serif;
+}
+
+.container{
+
+    max-wid*h:1400px;
+
+    margin:auto;
+}
+
+.he*der{
+
+    text-align:center;
+
+    *argin-bottom:30px;
+}
+
+.header h1{
+*    color:#1d6fd7;
+
+    margin-bot*om:10px;
+}
+
+.header p{
+
+    color:*666;
+}
+
+.weather-grid{
+
+    displa*:grid;
+
+    grid-template-columns:*        repeat(auto-fit,minmax(180*x,1fr));
+
+    gap:20px;
+}
+
+.weathe*-card{
+
+    background:white;
+
+   *border-radius:20px;
+
+    padding:2*px;
+
+    text-align:center;
+
+    b*x-shadow:
+        0 6px 18px
+     *  rgba(0,0,0,0.08);
+}
+
+.date{
+
+   *font-weight:bold;
+
+    margin-bott*m:10px;
+}
+
+.icon{
+
+    font-size:3*em;
+
+    margin-bottom:10px;
+}
+
+.w*ather{
+
+    margin-bottom:15px;
+
+ *  color:#444;
+}
+
+.temp{
+
+    font-*ize:1.8rem;
+
+    font-weight:bold;*
+    color:#f57c00;
+}
+
+.temp-min{
+*    color:#1d6fd7;
+}
+
+.loading{
+
+ *  text-align:center;
+
+    grid-col*mn:1/-1;
+
+    padding:50px;
+}
+
+.ho*e-link{
+
+    display:block;
+
+    m*rgin-top:40px;
+
+    text-align:cen*er;
+
+    text-decoration:none;
+
+  * font-weight:bold;
+
+    color:#1d6*d7;
+}

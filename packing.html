@@ -11,269 +11,94 @@
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="header">
+        <header class="header">
 
-        <h1>🇮🇪 WUCC 2026 Packing List</h1>
+            <h1>WUCC 2026 Packing List</h1>
 
-        <div id="progressText" class="progress-text">
-            0 / 0 完了
-        </div>
+            <p class="subtitle">
+                アイルランド遠征用 持ち物チェックリスト
+            </p>
 
-        <div class="progress-bar">
-            <div id="progressFill" class="progress-fill"></div>
+            <div class="progress-area">
+
+                <div id="progressText" class="progress-text">
+                    0 / 0 完了
+                </div>
+
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+
+            </div>
+
+        </header>
+
+        <main id="listContainer" class="sections">
+        </main>
+
+        <div class="bottom-area">
+
+            <button id="resetButton" class="reset-btn">
+                初期リストに戻す
+            </button>
+
+            <a href="index.html" class="home-link">
+                ← Homeへ戻る
+            </a>
+
         </div>
 
     </div>
 
-    <div id="listContainer" class="sections">
-    </div>
-
-    <a href="index.html" class="home-link">
-        ← Homeへ戻る
-    </a>
-
-</div>
-
-<script>
-
-const STORAGE_KEY = "wuccPacking";
-
-const defaultItems = [
-
-{
-category:"🛂 必須アイテム",
-items:[
-"パスポート",
-"海外保険",
-"財布",
-"現金",
-"スマホ",
-"家の鍵"
-]
-},
-
-{
-category:"🏃 アルティメット",
-items:[
-"ユニフォーム",
-"スパイク",
-"ランシュー",
-"帽子",
-"グローブ",
-"サングラス",
-"テーピング",
-"ディスク",
-"氷嚢",
-"水筒"
-]
-},
-
-{
-category:"🔌 電子機器",
-items:[
-"モバイル充電器",
-"変換プラグ",
-"延長コード"
-]
-},
-
-{
-category:"👕 衣類・生活用品",
-items:[
-"着替え",
-"タオル",
-"歯ブラシセット",
-"洗濯ネット",
-"サンダル",
-"日焼け止め"
-]
-},
-
-{
-category:"🍙 食品",
-items:[
-"カロリーメイト",
-"プロテイン",
-"アミノ酸"
-]
-}
-
-];
-
-let data =
-JSON.parse(localStorage.getItem(STORAGE_KEY));
-
-if(!data){
-
-    data = defaultItems.map(cat => ({
-        category:cat.category,
-        items:cat.items.map(text => ({
-            text:text,
-            checked:false
-        }))
-    }));
-
-    saveData();
-}
-
-function saveData(){
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(data)
-    );
-}
-
-function updateProgress(){
-
-    let total = 0;
-    let done = 0;
-
-    data.forEach(cat=>{
-
-        cat.items.forEach(item=>{
-
-            total++;
-
-            if(item.checked){
-                done++;
-            }
-
-        });
-
-    });
-
-    const percent =
-        total === 0
-        ? 0
-        : done / total * 100;
-
-    document.getElementById("progressText")
-        .innerText =
-        `${done} / ${total} 完了 (${Math.round(percent)}%)`;
-
-    document.getElementById("progressFill")
-        .style.width =
-        percent + "%";
-}
-
-function render(){
-
-    const container =
-        document.getElementById("listContainer");
-
-    container.innerHTML = "";
-
-    data.forEach((categoryObj,catIndex)=>{
-
-        const section =
-            document.createElement("div");
-
-        section.className =
-            "section";
-
-        section.innerHTML = `
-            <div class="section-title">
-                ${categoryObj.category}
-            </div>
-
-            <div class="item-list">
-            </div>
-
-            <div class="add-area">
-
-                <input
-                    id="input-${catIndex}"
-                    placeholder="項目追加">
-
-                <button
-                    onclick="addItem(${catIndex})">
-
-                    ＋
-
-                </button>
-
-            </div>
-        `;
-
-        const list =
-            section.querySelector(".item-list");
-
-        categoryObj.items.forEach((item,itemIndex)=>{
-
-            const row =
-                document.createElement("div");
-
-            row.className =
-                item.checked
-                ? "item completed"
-                : "item";
-
-            row.innerHTML = `
-                <label>
-                    <input
-                        type="checkbox"
-                        ${item.checked ? "checked" : ""}
-                    >
-                    ${item.text}
-                </label>
-            `;
-
-            row.querySelector("input")
-                .addEventListener(
-                    "change",
-                    (e)=>{
-
-                        item.checked =
-                            e.target.checked;
-
-                        saveData();
-                        render();
-                    }
-                );
-
-            list.appendChild(row);
-
-        });
-
-        container.appendChild(section);
-
-    });
-
-    updateProgress();
-}
-
-function addItem(catIndex){
-
-    const input =
-        document.getElementById(
-            `input-${catIndex}`
-        );
-
-    const text =
-        input.value.trim();
-
-    if(!text){
-        return;
-    }
-
-    data[catIndex].items.push({
-
-        text:text,
-        checked:false
-
-    });
-
-    saveData();
-
-    render();
-}
-
-render();
-
-</script>
-
-</body>
-</html>
+    <script>
+
+        const STORAGE_KEY = "wuccPackingList_v2";
+
+        const defaultData = [
+
+            {
+                category: "🛂 必須アイテム",
+                items: [
+                    { text: "パスポート", checked: false },
+                    { text: "海外保険", checked: false },
+                    { text: "財布", checked: false },
+                    { text: "現金", checked: false },
+                    { text: "スマホ", checked: false },
+                    { text: "家の鍵", checked: false },
+                    { text: "常備薬", checked: false },
+                    { text: "マスク", checked: false }
+                ]
+            },
+
+            {
+                category: "🏃 アルティメット",
+                items: [
+                    { text: "ユニフォーム", checked: false },
+                    { text: "スパイク", checked: false },
+                    { text: "ランシュー", checked: false },
+                    { text: "帽子", checked: false },
+                    { text: "グローブ", checked: false },
+                    { text: "アンダー", checked: false },
+                    { text: "サングラス", checked: false },
+                    { text: "靴下", checked: false },
+                    { text: "テーピング", checked: false },
+                    { text: "ディスク", checked: false },
+                    { text: "氷嚢", checked: false },
+                    { text: "水筒", checked: false },
+                    { text: "交換用ユニ", checked: false },
+                    { text: "サポーター", checked: false }
+                ]
+            },
+
+            {
+                category: "🔌 電子機器",
+                items: [
+                    { text: "モバイル充電器", checked: false },
+                    { text: "変換プラグ", checked: false },
+                    { text: "変圧器", checked: false },
+                    { text: "延長コード", checked: false },
+                    { text: "ドライヤー", checked: false },
+                    { text: "シェーバー", checked: false }
+       

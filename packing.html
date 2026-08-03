@@ -4,34 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>持ち物リスト</title>
+    <title>WUCC 2026 Packing List</title>
 
-</head>
+    <link g.css
 
-<body>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/<div class="container">
 
-    <div class="container">
+        <div class="header">
 
-        <h1>🎒 持ち物リスト</h1>
+            <h1>
+                🇮🇪 WUCC 2026
+            </h1>
+
+            <h2>
+                Packing List
+            </h2>
+
+            <p id="progressText">
+                0 / 0 完了
+            </p>
+
+            <div class="progress-bar">
+                <div id="progressFill"
+                    class="progress-fill">
+                </div>
+            </div>
+
+        </div>
 
         <div class="add-area">
+
             <input
-                type="text"
                 id="itemInput"
-                placeholder="持ち物を入力">
+                type="text"
+                placeholder="持ち物を追加">
 
             <button id="addButton">
                 追加
             </button>
+
         </div>
 
-        <ul id="checklist"></ul>
-
-        <button id="clearButton" class="danger">
-            全チェック解除
-        </button>
-
-        <br><br>
+        <div id="listContainer"></div>
 
         <a href="index.html" class="home-link">
             ← Homeへ戻る
@@ -41,122 +56,316 @@
 
     <script>
 
-        const STORAGE_KEY = "packingList";
+        const STORAGE_KEY = "wuccPackingList";
 
-        let items = JSON.parse(
-            localStorage.getItem(STORAGE_KEY)
-        ) || [
-            { text: "パスポート", checked: false },
-            { text: "VISA", checked: false },
-            { text: "航空券", checked: false },
-            { text: "SIMカード", checked: false },
-            { text: "充電器", checked: false }
+        const defaultItems = [
+
+            {
+                category: "🛂 必須アイテム",
+                text: "パスポート",
+                checked: false
+            },
+
+            {
+                category: "🛂 必須アイテム",
+                text: "海外保険",
+                checked: false
+            },
+
+            {
+                category: "🛂 必須アイテム",
+                text: "財布",
+                checked: false
+            },
+
+            {
+                category: "🛂 必須アイテム",
+                text: "現金",
+                checked: false
+            },
+
+            {
+                category: "🛂 必須アイテム",
+                text: "スマホ",
+                checked: false
+            },
+
+            {
+                category: "🛂 必須アイテム",
+                text: "家の鍵",
+                checked: false
+            },
+
+            {
+                category: "🏃 アルティメット",
+                text: "ユニフォーム",
+                checked: false
+            },
+
+            {
+                category: "🏃 アルティメット",
+                text: "スパイク",
+                checked: false
+            },
+
+            {
+                category: "🏃 アルティメット",
+                text: "ランシュー",
+                checked: false
+            },
+
+            {
+                category: "🏃 アルティメット",
+                text: "帽子",
+                checked: false
+            },
+
+            {
+                category: "🏃 アルティメット",
+                text: "グローブ",
+                checked: false
+            },
+
+            {
+                category: "🏃 アルティメット",
+                text: "サングラス",
+                checked: false
+            },
+
+            {
+                category: "🏃 アルティメット",
+                text: "テーピング",
+                checked: false
+            },
+
+            {
+                category: "🏃 アルティメット",
+                text: "ディスク",
+                checked: false
+            },
+
+            {
+                category: "🔌 電子機器",
+                text: "モバイル充電器",
+                checked: false
+            },
+
+            {
+                category: "🔌 電子機器",
+                text: "変換プラグ",
+                checked: false
+            },
+
+            {
+                category: "🔌 電子機器",
+                text: "延長コード",
+                checked: false
+            },
+
+            {
+                category: "👕 衣類・生活用品",
+                text: "着替え",
+                checked: false
+            },
+
+            {
+                category: "👕 衣類・生活用品",
+                text: "タオル",
+                checked: false
+            },
+
+            {
+                category: "👕 衣類・生活用品",
+                text: "歯ブラシセット",
+                checked: false
+            },
+
+            {
+                category: "👕 衣類・生活用品",
+                text: "洗濯ネット",
+                checked: false
+            },
+
+            {
+                category: "👕 衣類・生活用品",
+                text: "サンダル",
+                checked: false
+            },
+
+            {
+                category: "👕 衣類・生活用品",
+                text: "日焼け止め",
+                checked: false
+            }
+
         ];
 
-        function saveItems() {
+        let items =
+            JSON.parse(
+                localStorage.getItem(STORAGE_KEY)
+            ) || defaultItems;
+
+        function saveData() {
+
             localStorage.setItem(
                 STORAGE_KEY,
                 JSON.stringify(items)
             );
         }
 
-        function renderList() {
+        function updateProgress() {
 
-            const list =
-                document.getElementById("checklist");
+            const total = items.length;
 
-            list.innerHTML = "";
+            const checked =
+                items.filter(
+                    item => item.checked
+                ).length;
 
-            items.forEach((item, index) => {
+            document.getElementById(
+                "progressText"
+            ).innerText =
+                `${checked} / ${total} 完了`;
 
-                const li =
-                    document.createElement("li");
+            document.getElementById(
+                "progressFill"
+            ).style.width =
+                `${checked / total * 100}%`;
+        }
 
-                li.innerHTML = `
-                    <label>
-                        <input
-                            type="checkbox"
-                            ${item.checked ? "checked" : ""}
-                            onchange="toggleItem(${index})">
-                        ${item.text}
-                    </label>
+        function render() {
 
-                    <button
-                        class="delete-btn"
-                        onclick="deleteItem(${index})">
-                        ✕
-                    </button>
-                `;
+            const container =
+                document.getElementById(
+                    "listContainer"
+                );
 
-                list.appendChild(li);
+            container.innerHTML = "";
+
+            const categories =
+                [...new Set(
+                    items.map(
+                        item => item.category
+                    )
+                )];
+
+            categories.forEach(category => {
+
+                const section =
+                    document.createElement("div");
+
+                section.className =
+                    "section";
+
+                section.innerHTML =
+                    `<div class="section-title">
+                        ${category}
+                     </div>`;
+
+                items
+                    .filter(
+                        item =>
+                        item.category === category
+                    )
+                    .forEach(item => {
+
+                        const div =
+                            document.createElement(
+                                "div"
+                            );
+
+                        div.className =
+                            "item";
+
+                        if(item.checked){
+
+                            div.classList.add(
+                                "completed"
+                            );
+                        }
+
+                        div.innerHTML =
+                        `
+                        <label>
+                            <input
+                                type="checkbox"
+                                ${item.checked ? "checked" : ""}>
+                            ${item.text}
+                        </label>
+                        `;
+
+                        div.querySelector(
+                            "input"
+                        ).addEventListener(
+                            "change",
+                            e => {
+
+                                item.checked =
+                                    e.target.checked;
+
+                                saveData();
+
+                                render();
+                            }
+                        );
+
+                        section.appendChild(
+                            div
+                        );
+                    });
+
+                container.appendChild(
+                    section
+                );
+
             });
-        }
 
-        function toggleItem(index) {
-
-            items[index].checked =
-                !items[index].checked;
-
-            saveItems();
-        }
-
-        function deleteItem(index) {
-
-            items.splice(index, 1);
-
-            saveItems();
-            renderList();
+            updateProgress();
         }
 
         document
-            .getElementById("addButton")
-            .addEventListener("click", () => {
+            .getElementById(
+                "addButton"
+            )
+            .addEventListener(
+                "click",
+                () => {
 
-                const input =
-                    document.getElementById("itemInput");
+                    const text =
+                        document
+                        .getElementById(
+                            "itemInput"
+                        )
+                        .value
+                        .trim();
 
-                const text =
-                    input.value.trim();
+                    if(!text){
+                        return;
+                    }
 
-                if (text === "") {
-                    return;
-                }
+                    items.push({
 
-                items.push({
-                    text: text,
-                    checked: false
-                });
+                        category:
+                            "➕ 追加項目",
 
-                saveItems();
-                renderList();
+                        text:text,
 
-                input.value = "";
-            });
+                        checked:false
+                    });
 
-        document
-            .getElementById("itemInput")
-            .addEventListener("keydown", (e) => {
+                    saveData();
 
-                if (e.key === "Enter") {
+                    render();
+
                     document
-                        .getElementById("addButton")
-                        .click();
+                    .getElementById(
+                        "itemInput"
+                    )
+                    .value = "";
                 }
-            });
+            );
 
-        document
-            .getElementById("clearButton")
-            .addEventListener("click", () => {
-
-                items.forEach(item => {
-                    item.checked = false;
-                });
-
-                saveItems();
-                renderList();
-            });
-
-        renderList();
+        render();
 
     </script>
 

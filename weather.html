@@ -107,6 +107,11 @@ async function loadWeather(){
         card.className =
             "weather-card";
 
+        if(i === 0){
+            card.classList.add("today");
+        }
+
+
         card.innerHTML = `
 
             <div class="date">

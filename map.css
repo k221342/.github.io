@@ -87,7 +87,7 @@ body {
     color: var(--restaurant-color);
 }
 .drumstick-icon i {
-    color: var(--cafe-color);
+    color: var(--restaurant-color);
 }
 
 /* ガソリンスタンド */

@@ -6,99 +6,294 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WUCC 2026 Packing List</title>
 
-    packing.css
+    <link rel="stylesheet" href="packing.css">
 </head>
 
 <body>
 
     <div class="container">
 
-        <header class="header">
+        <div class="header">
 
-            <h1>WUCC 2026 Packing List</h1>
+            <h1>🇮🇪 WUCC 2026 Packing List</h1>
 
-            <p class="subtitle">
-                アイルランド遠征用 持ち物チェックリスト
-            </p>
-
-            <div class="progress-area">
-
-                <div id="progressText" class="progress-text">
-                    0 / 0 完了
-                </div>
-
-                <div class="progress-bar">
-                    <div id="progressFill" class="progress-fill"></div>
-                </div>
-
+            <div id="progressText">
+                0 / 0 完了
             </div>
 
-        </header>
-
-        <main id="listContainer" class="sections">
-        </main>
-
-        <div class="bottom-area">
-
-            <button id="resetButton" class="reset-btn">
-                初期リストに戻す
-            </button>
-
-            <a href="index.html" class="home-link">
-                ← Homeへ戻る
-            </a>
+            <div class="progress-bar">
+                <div id="progressFill"
+                    class="progress-fill">
+                </div>
+            </div>
 
         </div>
 
+        <div id="listContainer"
+            class="sections">
+        </div>
+
+        <a href="index.html"
+            class="home-link">
+            ← Homeへ戻る
+        </a>
+
     </div>
 
-    <script>
+<script>
 
-        const STORAGE_KEY = "wuccPackingList_v2";
+const STORAGE_KEY = "packingData";
 
-        const defaultData = [
+let data = JSON.parse(
+    localStorage.getItem(STORAGE_KEY)
+);
 
-            {
-                category: "🛂 必須アイテム",
-                items: [
-                    { text: "パスポート", checked: false },
-                    { text: "海外保険", checked: false },
-                    { text: "財布", checked: false },
-                    { text: "現金", checked: false },
-                    { text: "スマホ", checked: false },
-                    { text: "家の鍵", checked: false },
-                    { text: "常備薬", checked: false },
-                    { text: "マスク", checked: false }
-                ]
-            },
+if(!data){
 
-            {
-                category: "🏃 アルティメット",
-                items: [
-                    { text: "ユニフォーム", checked: false },
-                    { text: "スパイク", checked: false },
-                    { text: "ランシュー", checked: false },
-                    { text: "帽子", checked: false },
-                    { text: "グローブ", checked: false },
-                    { text: "アンダー", checked: false },
-                    { text: "サングラス", checked: false },
-                    { text: "靴下", checked: false },
-                    { text: "テーピング", checked: false },
-                    { text: "ディスク", checked: false },
-                    { text: "氷嚢", checked: false },
-                    { text: "水筒", checked: false },
-                    { text: "交換用ユニ", checked: false },
-                    { text: "サポーター", checked: false }
-                ]
-            },
+    data = [
 
-            {
-                category: "🔌 電子機器",
-                items: [
-                    { text: "モバイル充電器", checked: false },
-                    { text: "変換プラグ", checked: false },
-                    { text: "変圧器", checked: false },
-                    { text: "延長コード", checked: false },
-                    { text: "ドライヤー", checked: false },
-                    { text: "シェーバー", checked: false }
-       
+        {
+            category:"🛂 必須アイテム",
+
+            items:[
+                {
+                    text:"パスポート",
+                    checked:false
+                },
+
+                {
+                    text:"財布",
+                    checked:false
+                },
+
+                {
+                    text:"海外保険",
+                    checked:false
+                }
+            ]
+        },
+
+        {
+            category:"🏃 アルティメット",
+
+            items:[
+                {
+                    text:"ユニフォーム",
+                    checked:false
+                },
+
+                {
+                    text:"スパイク",
+                    checked:false
+                }
+            ]
+        }
+
+    ];
+
+}
+
+function saveData(){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(data)
+    );
+}
+
+function updateProgress(){
+
+    let total = 0;
+    let done = 0;
+
+    data.forEach(category=>{
+
+        category.items.forEach(item=>{
+
+            total++;
+
+            if(item.checked){
+                done++;
+            }
+
+        });
+
+    });
+
+    const percent =
+        Math.round(done/total*100);
+
+    document.getElementById(
+        "progressText"
+    ).innerText =
+        `${done} / ${total} 完了 (${percent}%)`;
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        percent + "%";
+}
+
+function deleteItem(
+    categoryIndex,
+    itemIndex
+){
+
+    data[categoryIndex]
+        .items
+        .splice(itemIndex,1);
+
+    saveData();
+
+    render();
+}
+
+function addItem(
+    categoryIndex
+){
+
+    const input =
+        document.getElementById(
+            `input-${categoryIndex}`
+        );
+
+    const text =
+        input.value.trim();
+
+    if(!text){
+        return;
+    }
+
+    data[categoryIndex]
+        .items
+        .push({
+
+            text:text,
+            checked:false
+
+        });
+
+    saveData();
+
+    render();
+}
+
+function render(){
+
+    const list =
+        document.getElementById(
+            "listContainer"
+        );
+
+    list.innerHTML = "";
+
+    data.forEach(
+        (category,catIndex)=>{
+
+        const section =
+            document.createElement("div");
+
+        section.className =
+            "section";
+
+        section.innerHTML = `
+
+            <div class="section-title">
+                ${category.category}
+            </div>
+
+            <div class="item-list"></div>
+
+            <div class="add-area">
+
+                <input
+                    id="input-${catIndex}"
+                    placeholder="項目追加">
+
+                <button
+                    onclick="addItem(${catIndex})">
+
+                    ＋
+
+                </button>
+
+            </div>
+        `;
+
+        const itemList =
+            section.querySelector(
+                ".item-list"
+            );
+
+        category.items.forEach(
+            (item,itemIndex)=>{
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+            row.className =
+                item.checked
+                ? "item completed"
+                : "item";
+
+            row.innerHTML = `
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        ${item.checked ? "checked" : ""}>
+
+                    ${item.text}
+
+                </label>
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteItem(${catIndex},${itemIndex})">
+
+                    削除
+
+                </button>
+
+            `;
+
+            row.querySelector(
+                "input"
+            ).addEventListener(
+                "change",
+                e=>{
+
+                item.checked =
+                    e.target.checked;
+
+                saveData();
+
+                render();
+
+            });
+
+            itemList.appendChild(
+                row
+            );
+
+        });
+
+        list.appendChild(
+            section
+        );
+
+    });
+
+    updateProgress();
+}
+
+render();
+
+</script>
+
+</body>
+
+</html>

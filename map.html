@@ -111,17 +111,17 @@
             'fa-solid fa-gas-pump',
             'map-icon gs-icon'
         );
-        
-        const pubIcon = createIcon(
-            'fa-solid fa-beer-mug-empty',
-            'map-icon pub-icon'
-        );
-        
+            
         const parkIcon = createIcon(
             'fa-solid fa-tree',
             'map-icon park-icon'
         );
 
+        const fieldIcon = createIcon(
+            'fa-solid fa-compact-disc',
+            'map-icon field-icon'
+        );
+        
         // Thomond Student Village
         L.marker(
             [52.682556, -8.659160],
@@ -486,6 +486,44 @@
             <i class="fa-solid fa-car"></i> 車 3分<br>
             <i class="fa-solid fa-person-walking"></i>徒歩 14分
         `);
+        // 会場
+        L.marker(
+            [52.671520495948556, -8.556843669815972],
+            { icon: parkIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Maguires Pitches UL</b><br>
+            会場 Field 1 南キャンパス<br>
+            天然芝 11面<br>
+            人工芝 6面<br>
+            <i class="fa-solid fa-car"></i> 車 15分<br>
+        `);
+        
+        L.marker(
+            [52.67340082622965, -8.560221694475159],
+            { icon: parkIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>UL 3G All Weather Pitches</b><br>
+            会場 Field 2 北キャンパス<br>
+            天然芝 1面<br>
+            人工芝 5面<br>
+            <i class="fa-solid fa-car"></i> 車 15分<br>
+        `);  
+
+        L.marker(
+            [52.635551764403644, -8.642907159442537],
+            { icon: parkIcon }
+        )
+        .addTo(map)
+        .bindPopup(`
+            <b>Crescent College Comprehensive SJ</b><br>
+            会場 Field 3<br>
+            天然芝 6面<br>
+            <i class="fa-solid fa-car"></i> 車 15分<br>
+        `);  
     </script>
 
 </body>

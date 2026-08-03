@@ -48,50 +48,125 @@ let data = JSON.parse(
     localStorage.getItem(STORAGE_KEY)
 );
 
+//
 if(!data){
 
     data = [
 
         {
-            category:"🛂 必須アイテム",
-
+            category:"🛂 必須・機内持込",
             items:[
-                {
-                    text:"パスポート",
-                    checked:false
-                },
-
-                {
-                    text:"財布",
-                    checked:false
-                },
-
-                {
-                    text:"海外保険",
-                    checked:false
-                }
+                {text:"パスポート",checked:false},
+                {text:"海外保険",checked:false},
+                {text:"財布",checked:false},
+                {text:"現金",checked:false},
+                {text:"スマホ",checked:false},
+                {text:"モバイル充電器",checked:false},
+                {text:"家の鍵",checked:false},
+                {text:"常備薬",checked:false},
+                {text:"マスク",checked:false},
+                {text:"枕",checked:false},
+                {text:"メディキュット的なもの",checked:false},
+                {text:"汗拭きシート",checked:false},
+                {text:"長袖・長ズボン",checked:false},
+                {text:"コンタクト",checked:false},
+                {text:"目薬",checked:false}
             ]
         },
 
         {
-            category:"🏃 アルティメット",
-
+            category:"🏃 試合で使う系",
             items:[
-                {
-                    text:"ユニフォーム",
-                    checked:false
-                },
+                {text:"ユニフォーム",checked:false},
+                {text:"スパイク",checked:false},
+                {text:"ランシュー",checked:false},
+                {text:"帽子",checked:false},
+                {text:"グローブ",checked:false},
+                {text:"アンダー",checked:false},
+                {text:"サングラス",checked:false},
+                {text:"靴下",checked:false},
+                {text:"テーピング",checked:false},
+                {text:"氷嚢",checked:false},
+                {text:"ディスク",checked:false},
+                {text:"水筒",checked:false},
+                {text:"交換用ユニ",checked:false},
+                {text:"サポーター",checked:false},
+                {text:"レジャーシート",checked:false},
+                {text:"イス",checked:false},
+                {text:"カッパ",checked:false}
+            ]
+        },
 
-                {
-                    text:"スパイク",
-                    checked:false
-                }
+        {
+            category:"👕 生活用品系",
+            items:[
+                {text:"シャンプー類",checked:false},
+                {text:"タオル",checked:false},
+                {text:"ボディタオル",checked:false},
+                {text:"クレンジング",checked:false},
+                {text:"スキンケア用品",checked:false},
+                {text:"歯ブラシセット",checked:false},
+                {text:"洗濯ネット",checked:false},
+                {text:"洗濯ロープ",checked:false},
+                {text:"洗濯ばさみ",checked:false},
+                {text:"ハンガー",checked:false},
+                {text:"洗濯洗剤",checked:false},
+                {text:"サンダル",checked:false},
+                {text:"折りたたみ傘",checked:false},
+                {text:"日焼け止め",checked:false},
+                {text:"ティッシュ",checked:false},
+                {text:"ゴミ袋大",checked:false},
+                {text:"ゴミ袋小",checked:false},
+                {text:"ジップロック",checked:false},
+                {text:"ばんそうこう",checked:false},
+                {text:"爪切り",checked:false},
+                {text:"新聞紙",checked:false},
+                {text:"生理用品",checked:false},
+                {text:"コンタクト保存液",checked:false}
+            ]
+        },
+
+        {
+            category:"🔌 電気系",
+            items:[
+                {text:"変換プラグ",checked:false},
+                {text:"変圧器",checked:false},
+                {text:"延長コード",checked:false},
+                {text:"ドライヤー",checked:false},
+                {text:"シェーバー",checked:false}
+            ]
+        },
+
+        {
+            category:"🍙 食品系",
+            items:[
+                {text:"部屋の米",checked:false},
+                {text:"アルファ米",checked:false},
+                {text:"ふりかけ",checked:false},
+                {text:"味噌汁",checked:false},
+                {text:"調味料",checked:false},
+                {text:"カロリーメイト",checked:false},
+                {text:"ウイダー",checked:false},
+                {text:"プロテイン",checked:false},
+                {text:"アミノ酸・サプリ",checked:false},
+                {text:"箸",checked:false},
+                {text:"スプーン・フォーク",checked:false},
+                {text:"紙コップ",checked:false},
+                {text:"タッパー",checked:false},
+                {text:"クーラーバッグ",checked:false},
+                {text:"保冷剤",checked:false},
+                {text:"サランラップ",checked:false},
+                {text:"パスタ",checked:false},
+                {text:"パスタ用タッパー",checked:false},
+                {text:"食器用洗剤・スポンジ",checked:false}
             ]
         }
 
     ];
 
-}
+    saveData();
+}    
+//
 
 function saveData(){
 

@@ -72,38 +72,74 @@ body{
 /* 天気カード */
 .weather-card{
 
-    flex:0 0 220px;
+    flex:0 0 280px;
 
     background:white;
 
     border-radius:20px;
 
-    padding:20px;
+    padding:18px;
 
     text-align:center;
 
     box-shadow:
         0 6px 18px rgba(0,0,0,0.08);
 
-    transition:0.2s;
+    border:3px solid transparent;
 }
 
-.weather-card:hover{
-    transform:translateY(-3px);
-}
-
-/* 今日を強調 */
 .weather-card.today{
 
-    border:3px solid #1d6fd7;
+    border-color:#1d6fd7;
 
     background:#eef5ff;
 }
 
 .date{
-    font-weight:bold;
+
     font-size:1.1rem;
-    margin-bottom:10px;
+
+    font-weight:bold;
+
+    margin-bottom:15px;
+}
+.timeline{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:8px;
+
+    margin-bottom:15px;
+}
+
+.time-slot{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+}
+
+.time{
+
+    font-size:0.85rem;
+
+    color:#666;
+
+    margin-bottom:4px;
+}
+
+.emoji{
+
+    font-size:1.3rem;
+}
+
+.weather-card:hover{
+    transform:translateY(-3px);
 }
 
 .icon{
@@ -116,16 +152,41 @@ body{
     color:#444;
 }
 
-.temp{
-    font-size:1.8rem;
+.temps{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:15px;
+}
+
+.max-temp{
+
+    font-size:1.1rem;
+
     font-weight:bold;
+
     color:#f57c00;
 }
 
-.temp-min{
+.min-temp{
+
+    font-size:1.1rem;
+
+    font-weight:bold;
+
     color:#1d6fd7;
-    font-size:1rem;
 }
+.wind{
+
+    margin-top:12px;
+
+    color:#666;
+
+    font-size:0.95rem;
+}
+
 
 .loading{
     text-align:center;

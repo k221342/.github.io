@@ -6,369 +6,274 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WUCC 2026 Packing List</title>
 
-    <link g.css
+    packing.css
+</head>
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/<div class="container">
+<body>
 
-        <div class="header">
+<div class="container">
 
-            <h1>
-                🇮🇪 WUCC 2026
-            </h1>
+    <div class="header">
 
-            <h2>
-                Packing List
-            </h2>
+        <h1>🇮🇪 WUCC 2026 Packing List</h1>
 
-            <p id="progressText">
-                0 / 0 完了
-            </p>
-
-            <div class="progress-bar">
-                <div id="progressFill"
-                    class="progress-fill">
-                </div>
-            </div>
-
+        <div id="progressText" class="progress-text">
+            0 / 0 完了
         </div>
 
-        <div class="add-area">
-
-            <input
-                id="itemInput"
-                type="text"
-                placeholder="持ち物を追加">
-
-            <button id="addButton">
-                追加
-            </button>
-
+        <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
         </div>
-
-        <div id="listContainer"></div>
-
-        <a href="index.html" class="home-link">
-            ← Homeへ戻る
-        </a>
 
     </div>
 
-    <script>
+    <div id="listContainer" class="sections">
+    </div>
 
-        const STORAGE_KEY = "wuccPackingList";
+    <a href="index.html" class="home-link">
+        ← Homeへ戻る
+    </a>
 
-        const defaultItems = [
+</div>
 
-            {
-                category: "🛂 必須アイテム",
-                text: "パスポート",
-                checked: false
-            },
+<script>
 
-            {
-                category: "🛂 必須アイテム",
-                text: "海外保険",
-                checked: false
-            },
+const STORAGE_KEY = "wuccPacking";
 
-            {
-                category: "🛂 必須アイテム",
-                text: "財布",
-                checked: false
-            },
+const defaultItems = [
 
-            {
-                category: "🛂 必須アイテム",
-                text: "現金",
-                checked: false
-            },
+{
+category:"🛂 必須アイテム",
+items:[
+"パスポート",
+"海外保険",
+"財布",
+"現金",
+"スマホ",
+"家の鍵"
+]
+},
 
-            {
-                category: "🛂 必須アイテム",
-                text: "スマホ",
-                checked: false
-            },
+{
+category:"🏃 アルティメット",
+items:[
+"ユニフォーム",
+"スパイク",
+"ランシュー",
+"帽子",
+"グローブ",
+"サングラス",
+"テーピング",
+"ディスク",
+"氷嚢",
+"水筒"
+]
+},
 
-            {
-                category: "🛂 必須アイテム",
-                text: "家の鍵",
-                checked: false
-            },
+{
+category:"🔌 電子機器",
+items:[
+"モバイル充電器",
+"変換プラグ",
+"延長コード"
+]
+},
 
-            {
-                category: "🏃 アルティメット",
-                text: "ユニフォーム",
-                checked: false
-            },
+{
+category:"👕 衣類・生活用品",
+items:[
+"着替え",
+"タオル",
+"歯ブラシセット",
+"洗濯ネット",
+"サンダル",
+"日焼け止め"
+]
+},
 
-            {
-                category: "🏃 アルティメット",
-                text: "スパイク",
-                checked: false
-            },
+{
+category:"🍙 食品",
+items:[
+"カロリーメイト",
+"プロテイン",
+"アミノ酸"
+]
+}
 
-            {
-                category: "🏃 アルティメット",
-                text: "ランシュー",
-                checked: false
-            },
+];
 
-            {
-                category: "🏃 アルティメット",
-                text: "帽子",
-                checked: false
-            },
+let data =
+JSON.parse(localStorage.getItem(STORAGE_KEY));
 
-            {
-                category: "🏃 アルティメット",
-                text: "グローブ",
-                checked: false
-            },
+if(!data){
 
-            {
-                category: "🏃 アルティメット",
-                text: "サングラス",
-                checked: false
-            },
+    data = defaultItems.map(cat => ({
+        category:cat.category,
+        items:cat.items.map(text => ({
+            text:text,
+            checked:false
+        }))
+    }));
 
-            {
-                category: "🏃 アルティメット",
-                text: "テーピング",
-                checked: false
-            },
+    saveData();
+}
 
-            {
-                category: "🏃 アルティメット",
-                text: "ディスク",
-                checked: false
-            },
+function saveData(){
 
-            {
-                category: "🔌 電子機器",
-                text: "モバイル充電器",
-                checked: false
-            },
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(data)
+    );
+}
 
-            {
-                category: "🔌 電子機器",
-                text: "変換プラグ",
-                checked: false
-            },
+function updateProgress(){
 
-            {
-                category: "🔌 電子機器",
-                text: "延長コード",
-                checked: false
-            },
+    let total = 0;
+    let done = 0;
 
-            {
-                category: "👕 衣類・生活用品",
-                text: "着替え",
-                checked: false
-            },
+    data.forEach(cat=>{
 
-            {
-                category: "👕 衣類・生活用品",
-                text: "タオル",
-                checked: false
-            },
+        cat.items.forEach(item=>{
 
-            {
-                category: "👕 衣類・生活用品",
-                text: "歯ブラシセット",
-                checked: false
-            },
+            total++;
 
-            {
-                category: "👕 衣類・生活用品",
-                text: "洗濯ネット",
-                checked: false
-            },
-
-            {
-                category: "👕 衣類・生活用品",
-                text: "サンダル",
-                checked: false
-            },
-
-            {
-                category: "👕 衣類・生活用品",
-                text: "日焼け止め",
-                checked: false
+            if(item.checked){
+                done++;
             }
 
-        ];
+        });
 
-        let items =
-            JSON.parse(
-                localStorage.getItem(STORAGE_KEY)
-            ) || defaultItems;
+    });
 
-        function saveData() {
+    const percent =
+        total === 0
+        ? 0
+        : done / total * 100;
 
-            localStorage.setItem(
-                STORAGE_KEY,
-                JSON.stringify(items)
-            );
-        }
+    document.getElementById("progressText")
+        .innerText =
+        `${done} / ${total} 完了 (${Math.round(percent)}%)`;
 
-        function updateProgress() {
+    document.getElementById("progressFill")
+        .style.width =
+        percent + "%";
+}
 
-            const total = items.length;
+function render(){
 
-            const checked =
-                items.filter(
-                    item => item.checked
-                ).length;
+    const container =
+        document.getElementById("listContainer");
 
-            document.getElementById(
-                "progressText"
-            ).innerText =
-                `${checked} / ${total} 完了`;
+    container.innerHTML = "";
 
-            document.getElementById(
-                "progressFill"
-            ).style.width =
-                `${checked / total * 100}%`;
-        }
+    data.forEach((categoryObj,catIndex)=>{
 
-        function render() {
+        const section =
+            document.createElement("div");
 
-            const container =
-                document.getElementById(
-                    "listContainer"
-                );
+        section.className =
+            "section";
 
-            container.innerHTML = "";
+        section.innerHTML = `
+            <div class="section-title">
+                ${categoryObj.category}
+            </div>
 
-            const categories =
-                [...new Set(
-                    items.map(
-                        item => item.category
-                    )
-                )];
+            <div class="item-list">
+            </div>
 
-            categories.forEach(category => {
+            <div class="add-area">
 
-                const section =
-                    document.createElement("div");
+                <input
+                    id="input-${catIndex}"
+                    placeholder="項目追加">
 
-                section.className =
-                    "section";
+                <button
+                    onclick="addItem(${catIndex})">
 
-                section.innerHTML =
-                    `<div class="section-title">
-                        ${category}
-                     </div>`;
+                    ＋
 
-                items
-                    .filter(
-                        item =>
-                        item.category === category
-                    )
-                    .forEach(item => {
+                </button>
 
-                        const div =
-                            document.createElement(
-                                "div"
-                            );
+            </div>
+        `;
 
-                        div.className =
-                            "item";
+        const list =
+            section.querySelector(".item-list");
 
-                        if(item.checked){
+        categoryObj.items.forEach((item,itemIndex)=>{
 
-                            div.classList.add(
-                                "completed"
-                            );
-                        }
+            const row =
+                document.createElement("div");
 
-                        div.innerHTML =
-                        `
-                        <label>
-                            <input
-                                type="checkbox"
-                                ${item.checked ? "checked" : ""}>
-                            ${item.text}
-                        </label>
-                        `;
+            row.className =
+                item.checked
+                ? "item completed"
+                : "item";
 
-                        div.querySelector(
-                            "input"
-                        ).addEventListener(
-                            "change",
-                            e => {
+            row.innerHTML = `
+                <label>
+                    <input
+                        type="checkbox"
+                        ${item.checked ? "checked" : ""}
+                    >
+                    ${item.text}
+                </label>
+            `;
 
-                                item.checked =
-                                    e.target.checked;
+            row.querySelector("input")
+                .addEventListener(
+                    "change",
+                    (e)=>{
 
-                                saveData();
+                        item.checked =
+                            e.target.checked;
 
-                                render();
-                            }
-                        );
-
-                        section.appendChild(
-                            div
-                        );
-                    });
-
-                container.appendChild(
-                    section
-                );
-
-            });
-
-            updateProgress();
-        }
-
-        document
-            .getElementById(
-                "addButton"
-            )
-            .addEventListener(
-                "click",
-                () => {
-
-                    const text =
-                        document
-                        .getElementById(
-                            "itemInput"
-                        )
-                        .value
-                        .trim();
-
-                    if(!text){
-                        return;
+                        saveData();
+                        render();
                     }
+                );
 
-                    items.push({
+            list.appendChild(row);
 
-                        category:
-                            "➕ 追加項目",
+        });
 
-                        text:text,
+        container.appendChild(section);
 
-                        checked:false
-                    });
+    });
 
-                    saveData();
+    updateProgress();
+}
 
-                    render();
+function addItem(catIndex){
 
-                    document
-                    .getElementById(
-                        "itemInput"
-                    )
-                    .value = "";
-                }
-            );
+    const input =
+        document.getElementById(
+            `input-${catIndex}`
+        );
 
-        render();
+    const text =
+        input.value.trim();
 
-    </script>
+    if(!text){
+        return;
+    }
+
+    data[catIndex].items.push({
+
+        text:text,
+        checked:false
+
+    });
+
+    saveData();
+
+    render();
+}
+
+render();
+
+</script>
 
 </body>
-
 </html>

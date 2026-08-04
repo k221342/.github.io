@@ -175,8 +175,6 @@
 
         let data = loadData();
 
-        let draggedItem = null;
-
         function cloneDefaultData() {
 
             return JSON.parse(
@@ -364,16 +362,10 @@
                             ? "item completed"
                             : "item";
 
-                    itemRow.setAttribute("draggable", "true");
-
                     itemRow.dataset.categoryIndex = categoryIndex;
                     itemRow.dataset.itemIndex = itemIndex;
 
                     itemRow.innerHTML = `
-                        <div class="drag-handle">
-                            ☰
-                        </div>
-
                         <label class="item-label">
                             <input
                                 type="checkbox"
@@ -382,25 +374,27 @@
                                 ${escapeHtml(item.text)}
                             </span>
                         </label>
-
+                    
                         <div class="item-actions">
+                    
                             <button
                                 class="move-btn"
                                 onclick="moveItemUp(${categoryIndex}, ${itemIndex})">
                                 ↑
                             </button>
-
+                    
                             <button
                                 class="move-btn"
                                 onclick="moveItemDown(${categoryIndex}, ${itemIndex})">
                                 ↓
                             </button>
-
+                    
                             <button
                                 class="delete-btn"
                                 onclick="deleteItem(${categoryIndex}, ${itemIndex})">
                                 削除
                             </button>
+                    
                         </div>
                     `;
 
@@ -414,54 +408,6 @@
 
                         saveData();
                         renderList();
-                    });
-
-                    itemRow.addEventListener("dragstart", function () {
-
-                        draggedItem = {
-                            categoryIndex: categoryIndex,
-                            itemIndex: itemIndex
-                        };
-
-                        itemRow.classList.add("dragging");
-                    });
-
-                    itemRow.addEventListener("dragend", function () {
-
-                        draggedItem = null;
-
-                        document
-                            .querySelectorAll(".dragging")
-                            .forEach(element => {
-                                element.classList.remove("dragging");
-                            });
-
-                        document
-                            .querySelectorAll(".drag-over")
-                            .forEach(element => {
-                                element.classList.remove("drag-over");
-                            });
-                    });
-
-                    itemRow.addEventListener("dragover", function (event) {
-                        event.preventDefault();
-                    });
-
-                    itemRow.addEventListener("drop", function (event) {
-
-                        event.preventDefault();
-                        event.stopPropagation();
-
-                        if (!draggedItem) {
-                            return;
-                        }
-
-                        moveItem(
-                            draggedItem.categoryIndex,
-                            draggedItem.itemIndex,
-                            categoryIndex,
-                            itemIndex
-                        );
                     });
 
                     itemList.appendChild(itemRow);

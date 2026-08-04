@@ -196,8 +196,6 @@
                     return cloneDefaultData();
                 }
 
-                migrateOldData(parsedData);
-
                 return parsedData;
 
             } catch (error) {
@@ -261,11 +259,6 @@
             data.forEach(category => {
 
                 category.items.forEach(item => {
-
-                    if (!isNormalItem(item)) {
-                        return;
-                    }
-
                     total++;
 
                     if (item.checked) {
@@ -291,7 +284,7 @@
         function getCategoryCompletedCount(category) {
 
             return category.items.filter(
-                item => isNormalItem(item) && item.checked
+                item => item.checked
             ).length;
         }
 

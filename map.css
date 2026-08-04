@@ -159,14 +159,36 @@ body {
     transition:0.2s;
 }
 
-.home-button:hover{
+.leaflet-home-button{
 
-    background:#f3f8ff;
+    background:white;
 
-    transform:scale(1.05);
+    border-radius:8px;
+
+    box-shadow:
+        0 1px 5px rgba(0,0,0,0.4);
+
+    overflow:hidden;
 }
 
-.home-button:active{
+.leaflet-home-button a{
 
-    transform:scale(0.95);
+    width:34px;
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:#1d6fd7;
+
+    font-size:18px;
+}
+
+.leaflet-home-button a:hover{
+
+    background:#f4f8ff;
 }

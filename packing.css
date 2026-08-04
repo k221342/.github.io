@@ -251,12 +251,6 @@ body {
     border-radius: 14px;
 }
 
-.item-list.drag-over {
-    background: rgba(0, 122, 77, 0.08);
-
-    outline: 2px dashed rgba(0, 122, 77, 0.35);
-}
-
 .item {
     display: flex;
 
@@ -406,29 +400,6 @@ body {
     border-top: 1px dashed #cfded7;
 }
 
-.add-area input {
-    flex: 1;
-
-    min-width: 0;
-
-    padding: 11px 12px;
-
-    border: 1px solid #cfded7;
-
-    border-radius: 12px;
-
-    font-size: 0.95rem;
-
-    outline: none;
-}
-
-.add-area input:focus {
-    border-color: #007a4d;
-
-    box-shadow:
-        0 0 0 3px rgba(0, 122, 77, 0.12);
-}
-
 .add-btn {
     flex-shrink: 0;
 
@@ -543,50 +514,6 @@ body {
     gap:8px;
 }
 
-.add-header-btn{
-
-    border:none;
-
-    background:#26433a;
-
-    color:white;
-
-    border-radius:12px;
-
-    padding:11px 16px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-}
-
-.add-header-btn:hover{
-
-    background:#152b24;
-}
-
-.header-item-row{
-
-    background:#007a4d;
-
-    color:white;
-
-    border:none;
-}
-
-.header-item-text{
-
-    flex:1;
-
-    font-weight:bold;
-
-    text-align:center;
-
-    white-space:pre-wrap;
-
-    line-height:1.6;
-}
-
 @media (max-width:700px) {
 
     body {
@@ -625,39 +552,28 @@ body {
         align-items:center;
     }
 
-    .item-label{
+    .item-label {
         flex:1;
         min-width:0;
     }
 
     .item-actions {
-
         display:flex;
-
         flex-direction:row;
         flex-wrap:nowrap;
-
-        
-
         gap:4px;
-
         flex-shrink:0;
     }
 
     .move-btn {
-
         width:44px;
         height:44px;
-
         padding:0;
     }
 
     .delete-btn {
-
         height:44px;
-
         white-space:nowrap;
-
         padding:0 12px;
     }
 
@@ -665,10 +581,7 @@ body {
         flex-direction:column;
     }
 
-    .add-btn,
-    .add-header-btn {
-
+    .add-btn {
         width:100%;
     }
-
 }

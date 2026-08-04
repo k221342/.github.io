@@ -19,10 +19,7 @@
 </head>
 
 <body>
-    <a href="index.html" class="home-button">
-        <i class="fa-solid fa-house"></i>
-    </a>
-    
+   
     <!-- 地図表示エリア。必ずbodyの中に置く -->
     <div id="map"></div>
 
@@ -39,6 +36,27 @@
             [52.682556, -8.659160],
             15
         );
+        const homeControl = L.control({
+            position: 'topright'
+        });
+        
+        homeControl.onAdd = function () {
+        
+            const div = L.DomUtil.create(
+                'div',
+                'leaflet-home-button'
+            );
+        
+            div.innerHTML = `
+                <a href="index.html">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+            `;
+        
+            return div;
+        };
+        
+        homeControl.addTo(map);
 
         // OpenStreetMapの地図タイル
         L.tileLayer(

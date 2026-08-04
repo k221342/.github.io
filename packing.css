@@ -507,76 +507,164 @@ body {
     background: #eef8f3;
 }
 
-@media (max-width:700px){
+.add-area textarea{
 
-    .item-actions{
+    width:100%;
+
+    min-height:80px;
+
+    resize:vertical;
+
+    padding:12px;
+
+    border:1px solid #cfded7;
+
+    border-radius:12px;
+
+    font-size:0.95rem;
+
+    font-family:inherit;
+}
+
+.add-area textarea:focus{
+
+    border-color:#007a4d;
+
+    outline:none;
+
+    box-shadow:
+        0 0 0 3px rgba(0,122,77,0.12);
+}
+
+.add-buttons{
+
+    display:flex;
+
+    gap:8px;
+}
+
+.add-header-btn{
+
+    border:none;
+
+    background:#26433a;
+
+    color:white;
+
+    border-radius:12px;
+
+    padding:11px 16px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+.add-header-btn:hover{
+
+    background:#152b24;
+}
+
+.header-item-row{
+
+    background:#007a4d;
+
+    color:white;
+
+    border:none;
+}
+
+.header-item-text{
+
+    flex:1;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    white-space:pre-wrap;
+
+    line-height:1.6;
+}
+
+@media (max-width:700px) {
+
+    body {
+        padding:18px;
+    }
+
+    .header {
+        padding:24px 18px;
+    }
+
+    .header h1 {
+        font-size:1.8rem;
+    }
+
+    .sections {
+        grid-template-columns:1fr;
+    }
+
+    .section-card {
+        padding:18px;
+    }
+
+    .section-header {
+        flex-direction:column;
+    }
+
+    .category-actions {
+        width:100%;
+        justify-content:flex-end;
+    }
+
+    .item {
+        align-items:center;
+    }
+
+    .item-label{
+        flex:1;
+        min-width:0;
+    }
+
+    .item-actions {
 
         display:flex;
 
         flex-direction:row;
 
+        align-items:center;
+
         gap:4px;
+
+        flex-shrink:0;
     }
 
-    .move-btn{
+    .move-btn {
 
         width:44px;
+        height:44px;
+
+        padding:0;
+    }
+
+    .delete-btn {
 
         height:44px;
-    }
-}
 
-@media (max-width: 700px) {
+        white-space:nowrap;
 
-    body {
-        padding: 18px;
-    }
-
-    .header {
-        padding: 24px 18px;
-    }
-
-    .header h1 {
-        font-size: 1.8rem;
-    }
-
-    .sections {
-        grid-template-columns: 1fr;
-    }
-
-    .section-card {
-        padding: 18px;
-    }
-
-    .section-header {
-        flex-direction: column;
-    }
-
-    .category-actions {
-        width: 100%;
-
-        justify-content: flex-end;
-    }
-
-    .item {
-        align-items: flex-start;
-    }
-
-    .item-actions {
-        flex-direction: column;
-    }
-
-    .move-btn,
-    .delete-btn {
-        width: 52px;
+        padding:0 12px;
     }
 
     .add-area {
-        flex-direction: column;
+        flex-direction:column;
     }
 
-    .add-btn {
-        width: 100%;
+    .add-btn,
+    .add-header-btn {
+
+        width:100%;
     }
 
 }

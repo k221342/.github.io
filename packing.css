@@ -619,6 +619,9 @@ body {
     }
 
     .item {
+        display:flex;
+        flex-wrap:nowrap;
+        justify-content:space-between;
         align-items:center;
     }
 
@@ -632,8 +635,9 @@ body {
         display:flex;
 
         flex-direction:row;
+        flex-wrap:nowrap;
 
-        align-items:center;
+        
 
         gap:4px;
 

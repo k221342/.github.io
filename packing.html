@@ -17,10 +17,6 @@
 
             <h1>WUCC 2026 Packing List</h1>
 
-            <p class="subtitle">
-                アイルランド遠征用 持ち物チェックリスト
-            </p>
-
             <div class="progress-area">
 
                 <div id="progressText" class="progress-text">
@@ -65,7 +61,6 @@
             {
                 category: "🛂 必須・機内持込",
                 items: [
-                    { text: "機内持込", type: "header" },
                     { text: "パスポート", checked: false, type: "item" },
                     { text: "海外保険", checked: false, type: "item" },
                     { text: "財布", checked: false, type: "item" },
@@ -87,7 +82,6 @@
             {
                 category: "🏃 試合で使う系",
                 items: [
-                    { text: "試合用品", type: "header" },
                     { text: "ユニフォーム", checked: false, type: "item" },
                     { text: "スパイク", checked: false, type: "item" },
                     { text: "ランシュー", checked: false, type: "item" },
@@ -111,7 +105,6 @@
             {
                 category: "👕 生活用品系",
                 items: [
-                    { text: "生活用品", type: "header" },
                     { text: "シャンプー類", checked: false, type: "item" },
                     { text: "タオル", checked: false, type: "item" },
                     { text: "ボディタオル", checked: false, type: "item" },
@@ -141,7 +134,6 @@
             {
                 category: "🔌 電気系",
                 items: [
-                    { text: "充電・電源", type: "header" },
                     { text: "変換プラグ", checked: false, type: "item" },
                     { text: "変圧器", checked: false, type: "item" },
                     { text: "延長コード", checked: false, type: "item" },
@@ -153,7 +145,6 @@
             {
                 category: "🍙 食品系",
                 items: [
-                    { text: "食品・補給", type: "header" },
                     { text: "部屋の米", checked: false, type: "item" },
                     { text: "アルファ米", checked: false, type: "item" },
                     { text: "ふりかけ", checked: false, type: "item" },
@@ -262,11 +253,6 @@
                 .replaceAll("\n", "<br>");
         }
 
-        function isNormalItem(item) {
-
-            return item.type !== "header";
-        }
-
         function updateProgress() {
 
             let total = 0;
@@ -309,13 +295,6 @@
             ).length;
         }
 
-        function getCategoryNormalItemCount(category) {
-
-            return category.items.filter(
-                item => isNormalItem(item)
-            ).length;
-        }
-
         function renderList() {
 
             const listContainer =
@@ -336,7 +315,7 @@
                         <div class="section-title-area">
                             <h2>${escapeHtml(category.category)}</h2>
                             <span class="section-count">
-                                ${getCategoryCompletedCount(category)} / ${getCategoryNormalItemCount(category)}
+                                ${getCategoryCompletedCount(category)} / ${category.items.length}
                             </span>
                         </div>
 
@@ -366,7 +345,7 @@
                         <textarea
                             id="input-${categoryIndex}"
                             rows="3"
-                            placeholder="このカテゴリに追加。改行も使えます。"></textarea>
+                            placeholder="このカテゴリに追加"></textarea>
 
                         <div class="add-buttons">
 
@@ -375,13 +354,6 @@
                                 onclick="addItem(${categoryIndex})">
                                 アイテム追加
                             </button>
-
-                            <button
-                                class="add-header-btn"
-                                onclick="addHeaderItem(${categoryIndex})">
-                                見出し追加
-                            </button>
-
                         </div>
 
                     </div>
@@ -389,101 +361,67 @@
 
                 const itemList =
                     section.querySelector(".item-list");
-
+                
                 category.items.forEach((item, itemIndex) => {
-
+                
                     const itemRow =
                         document.createElement("div");
-
-                    if (item.type === "header") {
-
-                        itemRow.className =
-                            "item header-item-row";
-
-                        itemRow.innerHTML = `
-                            <div class="header-item-text">
+                
+                    itemRow.className =
+                        item.checked
+                            ? "item completed"
+                            : "item";
+                
+                    itemRow.innerHTML = `
+                        <label class="item-label">
+                
+                            <input
+                                type="checkbox"
+                                ${item.checked ? "checked" : ""}>
+                
+                            <span class="item-text">
                                 ${formatText(item.text)}
-                            </div>
-
-                            <div class="item-actions">
-
-                                <button
-                                    class="move-btn"
-                                    onclick="moveItemUp(${categoryIndex}, ${itemIndex})">
-                                    ↑
-                                </button>
-
-                                <button
-                                    class="move-btn"
-                                    onclick="moveItemDown(${categoryIndex}, ${itemIndex})">
-                                    ↓
-                                </button>
-
-                                <button
-                                    class="delete-btn"
-                                    onclick="deleteItem(${categoryIndex}, ${itemIndex})">
-                                    削除
-                                </button>
-
-                            </div>
-                        `;
-
-                    } else {
-
-                        itemRow.className =
-                            item.checked
-                                ? "item completed"
-                                : "item";
-
-                        itemRow.innerHTML = `
-                            <label class="item-label">
-                                <input
-                                    type="checkbox"
-                                    ${item.checked ? "checked" : ""}>
-                                <span class="item-text">
-                                    ${formatText(item.text)}
-                                </span>
-                            </label>
-
-                            <div class="item-actions">
-
-                                <button
-                                    class="move-btn"
-                                    onclick="moveItemUp(${categoryIndex}, ${itemIndex})">
-                                    ↑
-                                </button>
-
-                                <button
-                                    class="move-btn"
-                                    onclick="moveItemDown(${categoryIndex}, ${itemIndex})">
-                                    ↓
-                                </button>
-
-                                <button
-                                    class="delete-btn"
-                                    onclick="deleteItem(${categoryIndex}, ${itemIndex})">
-                                    削除
-                                </button>
-
-                            </div>
-                        `;
-
-                        const checkbox =
-                            itemRow.querySelector("input");
-
-                        checkbox.addEventListener("change", event => {
-
-                            item.checked =
-                                event.target.checked;
-
-                            saveData();
-                            renderList();
-                        });
-
-                    }
-
+                            </span>
+                
+                        </label>
+                
+                        <div class="item-actions">
+                
+                            <button
+                                class="move-btn"
+                                onclick="moveItemUp(${categoryIndex}, ${itemIndex})">
+                                ↑
+                            </button>
+                
+                            <button
+                                class="move-btn"
+                                onclick="moveItemDown(${categoryIndex}, ${itemIndex})">
+                                ↓
+                            </button>
+                
+                            <button
+                                class="delete-btn"
+                                onclick="deleteItem(${categoryIndex}, ${itemIndex})">
+                                削除
+                            </button>
+                
+                        </div>
+                    `;
+                
+                    const checkbox =
+                        itemRow.querySelector("input");
+                
+                    checkbox.addEventListener("change", event => {
+                
+                        item.checked =
+                            event.target.checked;
+                
+                        saveData();
+                        renderList();
+                    });
+                
                     itemList.appendChild(itemRow);
-
+                
                 });
 
                 listContainer.appendChild(section);
@@ -590,25 +528,6 @@
             data[categoryIndex].items.push({
                 text: text,
                 checked: false,
-                type: "item"
-            });
-
-            saveData();
-            renderList();
-        }
-
-        function addHeaderItem(categoryIndex) {
-
-            const text =
-                getInputText(categoryIndex);
-
-            if (text === "") {
-                return;
-            }
-
-            data[categoryIndex].items.push({
-                text: text,
-                type: "header"
             });
 
             saveData();

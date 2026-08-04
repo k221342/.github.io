@@ -13,361 +13,688 @@
 
     <div class="container">
 
-        <div class="header">
+        <header class="header">
 
             <h1>WUCC 2026 Packing List</h1>
 
-            <div id="progressText">
-                0 / 0 完了
-            </div>
+            <p class="subtitle">
+                アイルランド遠征用 持ち物チェックリスト
+            </p>
 
-            <div class="progress-bar">
-                <div id="progressFill"
-                    class="progress-fill">
+            <div class="progress-area">
+
+                <div id="progressText" class="progress-text">
+                    0 / 0 完了
                 </div>
+
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+
             </div>
 
-        </div>
+            <button id="addCategoryButton" class="add-category-btn">
+                ＋ カテゴリ追加
+            </button>
 
-        <div id="listContainer"
-            class="sections">
-        </div>
+        </header>
 
-        <a href="index.html"
-            class="home-link">
-            ← Homeへ戻る
-        </a>
+        <main id="listContainer" class="sections">
+        </main>
+
+        <div class="bottom-area">
+
+            <button id="resetButton" class="reset-btn">
+                初期リストに戻す
+            </button>
+
+            <a href="index.html" class="home-link">
+                ← Homeへ戻る
+            </a>
+
+        </div>
 
     </div>
 
-<script>
+    <script>
 
-const STORAGE_KEY = "packingData";
+        const STORAGE_KEY = "packingData";
 
-let data = JSON.parse(
-    localStorage.getItem(STORAGE_KEY)
-);
+        const defaultData = [
 
-//
-if(!data){
+            {
+                category: "🛂 必須・機内持込",
+                items: [
+                    { text: "パスポート", checked: false },
+                    { text: "海外保険", checked: false },
+                    { text: "財布", checked: false },
+                    { text: "現金", checked: false },
+                    { text: "スマホ", checked: false },
+                    { text: "モバイル充電器", checked: false },
+                    { text: "家の鍵", checked: false },
+                    { text: "常備薬", checked: false },
+                    { text: "マスク", checked: false },
+                    { text: "枕", checked: false },
+                    { text: "メディキュット的なもの", checked: false },
+                    { text: "汗拭きシート", checked: false },
+                    { text: "長袖・長ズボン", checked: false },
+                    { text: "コンタクト", checked: false },
+                    { text: "目薬", checked: false }
+                ]
+            },
 
-    data = [
+            {
+                category: "🏃 試合で使う系",
+                items: [
+                    { text: "ユニフォーム", checked: false },
+                    { text: "スパイク", checked: false },
+                    { text: "ランシュー", checked: false },
+                    { text: "帽子", checked: false },
+                    { text: "グローブ", checked: false },
+                    { text: "アンダー", checked: false },
+                    { text: "サングラス", checked: false },
+                    { text: "靴下", checked: false },
+                    { text: "テーピング", checked: false },
+                    { text: "氷嚢", checked: false },
+                    { text: "ディスク", checked: false },
+                    { text: "水筒", checked: false },
+                    { text: "交換用ユニ", checked: false },
+                    { text: "サポーター", checked: false },
+                    { text: "レジャーシート", checked: false },
+                    { text: "イス", checked: false },
+                    { text: "カッパ", checked: false }
+                ]
+            },
 
-        {
-            category:"🛂 必須・機内持込",
-            items:[
-                {text:"パスポート",checked:false},
-                {text:"海外保険",checked:false},
-                {text:"財布",checked:false},
-                {text:"現金",checked:false},
-                {text:"スマホ",checked:false},
-                {text:"モバイル充電器",checked:false},
-                {text:"家の鍵",checked:false},
-                {text:"常備薬",checked:false},
-                {text:"マスク",checked:false},
-                {text:"枕",checked:false},
-                {text:"メディキュット的なもの",checked:false},
-                {text:"汗拭きシート",checked:false},
-                {text:"長袖・長ズボン",checked:false},
-                {text:"コンタクト",checked:false},
-                {text:"目薬",checked:false}
-            ]
-        },
+            {
+                category: "👕 生活用品系",
+                items: [
+                    { text: "シャンプー類", checked: false },
+                    { text: "タオル", checked: false },
+                    { text: "ボディタオル", checked: false },
+                    { text: "クレンジング", checked: false },
+                    { text: "スキンケア用品", checked: false },
+                    { text: "歯ブラシセット", checked: false },
+                    { text: "洗濯ネット", checked: false },
+                    { text: "洗濯ロープ", checked: false },
+                    { text: "洗濯ばさみ", checked: false },
+                    { text: "ハンガー", checked: false },
+                    { text: "洗濯洗剤", checked: false },
+                    { text: "サンダル", checked: false },
+                    { text: "折りたたみ傘", checked: false },
+                    { text: "日焼け止め", checked: false },
+                    { text: "ティッシュ", checked: false },
+                    { text: "ゴミ袋大", checked: false },
+                    { text: "ゴミ袋小", checked: false },
+                    { text: "ジップロック", checked: false },
+                    { text: "ばんそうこう", checked: false },
+                    { text: "爪切り", checked: false },
+                    { text: "新聞紙", checked: false },
+                    { text: "生理用品", checked: false },
+                    { text: "コンタクト保存液", checked: false }
+                ]
+            },
 
-        {
-            category:"🏃 試合で使う系",
-            items:[
-                {text:"ユニフォーム",checked:false},
-                {text:"スパイク",checked:false},
-                {text:"ランシュー",checked:false},
-                {text:"帽子",checked:false},
-                {text:"グローブ",checked:false},
-                {text:"アンダー",checked:false},
-                {text:"サングラス",checked:false},
-                {text:"靴下",checked:false},
-                {text:"テーピング",checked:false},
-                {text:"氷嚢",checked:false},
-                {text:"ディスク",checked:false},
-                {text:"水筒",checked:false},
-                {text:"交換用ユニ",checked:false},
-                {text:"サポーター",checked:false},
-                {text:"レジャーシート",checked:false},
-                {text:"イス",checked:false},
-                {text:"カッパ",checked:false}
-            ]
-        },
+            {
+                category: "🔌 電気系",
+                items: [
+                    { text: "変換プラグ", checked: false },
+                    { text: "変圧器", checked: false },
+                    { text: "延長コード", checked: false },
+                    { text: "ドライヤー", checked: false },
+                    { text: "シェーバー", checked: false }
+                ]
+            },
 
-        {
-            category:"👕 生活用品系",
-            items:[
-                {text:"シャンプー類",checked:false},
-                {text:"タオル",checked:false},
-                {text:"ボディタオル",checked:false},
-                {text:"クレンジング",checked:false},
-                {text:"スキンケア用品",checked:false},
-                {text:"歯ブラシセット",checked:false},
-                {text:"洗濯ネット",checked:false},
-                {text:"洗濯ロープ",checked:false},
-                {text:"洗濯ばさみ",checked:false},
-                {text:"ハンガー",checked:false},
-                {text:"洗濯洗剤",checked:false},
-                {text:"サンダル",checked:false},
-                {text:"折りたたみ傘",checked:false},
-                {text:"日焼け止め",checked:false},
-                {text:"ティッシュ",checked:false},
-                {text:"ゴミ袋大",checked:false},
-                {text:"ゴミ袋小",checked:false},
-                {text:"ジップロック",checked:false},
-                {text:"ばんそうこう",checked:false},
-                {text:"爪切り",checked:false},
-                {text:"新聞紙",checked:false},
-                {text:"生理用品",checked:false},
-                {text:"コンタクト保存液",checked:false}
-            ]
-        },
-
-        {
-            category:"🔌 電気系",
-            items:[
-                {text:"変換プラグ",checked:false},
-                {text:"変圧器",checked:false},
-                {text:"延長コード",checked:false},
-                {text:"ドライヤー",checked:false},
-                {text:"シェーバー",checked:false}
-            ]
-        },
-
-        {
-            category:"🍙 食品系",
-            items:[
-                {text:"部屋の米",checked:false},
-                {text:"アルファ米",checked:false},
-                {text:"ふりかけ",checked:false},
-                {text:"味噌汁",checked:false},
-                {text:"調味料",checked:false},
-                {text:"カロリーメイト",checked:false},
-                {text:"ウイダー",checked:false},
-                {text:"プロテイン",checked:false},
-                {text:"アミノ酸・サプリ",checked:false},
-                {text:"箸",checked:false},
-                {text:"スプーン・フォーク",checked:false},
-                {text:"紙コップ",checked:false},
-                {text:"タッパー",checked:false},
-                {text:"クーラーバッグ",checked:false},
-                {text:"保冷剤",checked:false},
-                {text:"サランラップ",checked:false},
-                {text:"パスタ",checked:false},
-                {text:"パスタ用タッパー",checked:false},
-                {text:"食器用洗剤・スポンジ",checked:false}
-            ]
-        }
-
-    ];
-
-    saveData();
-}    
-//
-
-function saveData(){
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(data)
-    );
-}
-
-function updateProgress(){
-
-    let total = 0;
-    let done = 0;
-
-    data.forEach(category=>{
-
-        category.items.forEach(item=>{
-
-            total++;
-
-            if(item.checked){
-                done++;
+            {
+                category: "🍙 食品系",
+                items: [
+                    { text: "部屋の米", checked: false },
+                    { text: "アルファ米", checked: false },
+                    { text: "ふりかけ", checked: false },
+                    { text: "味噌汁", checked: false },
+                    { text: "調味料", checked: false },
+                    { text: "カロリーメイト", checked: false },
+                    { text: "ウイダー", checked: false },
+                    { text: "プロテイン", checked: false },
+                    { text: "アミノ酸・サプリ", checked: false },
+                    { text: "箸", checked: false },
+                    { text: "スプーン・フォーク", checked: false },
+                    { text: "紙コップ", checked: false },
+                    { text: "タッパー", checked: false },
+                    { text: "クーラーバッグ", checked: false },
+                    { text: "保冷剤", checked: false },
+                    { text: "サランラップ", checked: false },
+                    { text: "パスタ", checked: false },
+                    { text: "パスタ用タッパー", checked: false },
+                    { text: "食器用洗剤・スポンジ", checked: false }
+                ]
             }
 
-        });
+        ];
 
-    });
+        let data = loadData();
 
-    const percent =
-        Math.round(done/total*100);
+        let draggedItem = null;
 
-    document.getElementById(
-        "progressText"
-    ).innerText =
-        `${done} / ${total} 完了 (${percent}%)`;
+        function cloneDefaultData() {
 
-    document.getElementById(
-        "progressFill"
-    ).style.width =
-        percent + "%";
-}
-
-function deleteItem(
-    categoryIndex,
-    itemIndex
-){
-
-    data[categoryIndex]
-        .items
-        .splice(itemIndex,1);
-
-    saveData();
-
-    render();
-}
-
-function addItem(
-    categoryIndex
-){
-
-    const input =
-        document.getElementById(
-            `input-${categoryIndex}`
-        );
-
-    const text =
-        input.value.trim();
-
-    if(!text){
-        return;
-    }
-
-    data[categoryIndex]
-        .items
-        .push({
-
-            text:text,
-            checked:false
-
-        });
-
-    saveData();
-
-    render();
-}
-
-function render(){
-
-    const list =
-        document.getElementById(
-            "listContainer"
-        );
-
-    list.innerHTML = "";
-
-    data.forEach(
-        (category,catIndex)=>{
-
-        const section =
-            document.createElement("div");
-
-        section.className =
-            "section";
-
-        section.innerHTML = `
-
-            <div class="section-title">
-                ${category.category}
-            </div>
-
-            <div class="item-list"></div>
-
-            <div class="add-area">
-
-                <input
-                    id="input-${catIndex}"
-                    placeholder="項目追加">
-
-                <button
-                    onclick="addItem(${catIndex})">
-
-                    ＋
-
-                </button>
-
-            </div>
-        `;
-
-        const itemList =
-            section.querySelector(
-                ".item-list"
+            return JSON.parse(
+                JSON.stringify(defaultData)
             );
+        }
 
-        category.items.forEach(
-            (item,itemIndex)=>{
+        function loadData() {
 
-            const row =
-                document.createElement(
-                    "div"
-                );
+            const savedData =
+                localStorage.getItem(STORAGE_KEY);
 
-            row.className =
-                item.checked
-                ? "item completed"
-                : "item";
+            if (!savedData) {
+                return cloneDefaultData();
+            }
 
-            row.innerHTML = `
+            try {
 
-                <label>
+                const parsedData =
+                    JSON.parse(savedData);
 
-                    <input
-                        type="checkbox"
-                        ${item.checked ? "checked" : ""}>
+                if (!Array.isArray(parsedData)) {
+                    return cloneDefaultData();
+                }
 
-                    ${item.text}
+                return parsedData;
 
-                </label>
+            } catch (error) {
 
-                <button
-                    class="delete-btn"
-                    onclick="deleteItem(${catIndex},${itemIndex})">
+                return cloneDefaultData();
+            }
+        }
 
-                    削除
+        function saveData() {
 
-                </button>
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(data)
+            );
+        }
 
-            `;
+        function escapeHtml(text) {
 
-            row.querySelector(
-                "input"
-            ).addEventListener(
-                "change",
-                e=>{
+            return String(text)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
 
-                item.checked =
-                    e.target.checked;
+        function updateProgress() {
 
-                saveData();
+            let total = 0;
+            let completed = 0;
 
-                render();
+            data.forEach(category => {
+
+                category.items.forEach(item => {
+
+                    total++;
+
+                    if (item.checked) {
+                        completed++;
+                    }
+
+                });
 
             });
 
-            itemList.appendChild(
-                row
+            const percent =
+                total === 0
+                    ? 0
+                    : Math.round((completed / total) * 100);
+
+            document.getElementById("progressText").textContent =
+                `${completed} / ${total} 完了 (${percent}%)`;
+
+            document.getElementById("progressFill").style.width =
+                `${percent}%`;
+        }
+
+        function getCategoryCompletedCount(category) {
+
+            return category.items.filter(
+                item => item.checked
+            ).length;
+        }
+
+        function renderList() {
+
+            const listContainer =
+                document.getElementById("listContainer");
+
+            listContainer.innerHTML = "";
+
+            data.forEach((category, categoryIndex) => {
+
+                const section =
+                    document.createElement("section");
+
+                section.className = "section-card";
+
+                section.innerHTML = `
+                    <div class="section-header">
+
+                        <div class="section-title-area">
+                            <h2>${escapeHtml(category.category)}</h2>
+                            <span class="section-count">
+                                ${getCategoryCompletedCount(category)} / ${category.items.length}
+                            </span>
+                        </div>
+
+                        <div class="category-actions">
+                            <button
+                                class="category-btn"
+                                onclick="editCategory(${categoryIndex})">
+                                編集
+                            </button>
+
+                            <button
+                                class="category-delete-btn"
+                                onclick="deleteCategory(${categoryIndex})">
+                                削除
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="item-list"
+                        data-category-index="${categoryIndex}">
+                    </div>
+
+                    <div class="add-area">
+                        <input
+                            type="text"
+                            id="input-${categoryIndex}"
+                            placeholder="このカテゴリに追加">
+                        <button
+                            class="add-btn"
+                            onclick="addItem(${categoryIndex})">
+                            追加
+                        </button>
+                    </div>
+                `;
+
+                const itemList =
+                    section.querySelector(".item-list");
+
+                itemList.addEventListener("dragover", function (event) {
+                    event.preventDefault();
+                    itemList.classList.add("drag-over");
+                });
+
+                itemList.addEventListener("dragleave", function () {
+                    itemList.classList.remove("drag-over");
+                });
+
+                itemList.addEventListener("drop", function (event) {
+
+                    event.preventDefault();
+
+                    itemList.classList.remove("drag-over");
+
+                    if (!draggedItem) {
+                        return;
+                    }
+
+                    moveItem(
+                        draggedItem.categoryIndex,
+                        draggedItem.itemIndex,
+                        categoryIndex,
+                        category.items.length
+                    );
+                });
+
+                category.items.forEach((item, itemIndex) => {
+
+                    const itemRow =
+                        document.createElement("div");
+
+                    itemRow.className =
+                        item.checked
+                            ? "item completed"
+                            : "item";
+
+                    itemRow.setAttribute("draggable", "true");
+
+                    itemRow.dataset.categoryIndex = categoryIndex;
+                    itemRow.dataset.itemIndex = itemIndex;
+
+                    itemRow.innerHTML = `
+                        <div class="drag-handle">
+                            ☰
+                        </div>
+
+                        <label class="item-label">
+                            <input
+                                type="checkbox"
+                                ${item.checked ? "checked" : ""}>
+                            <span class="item-text">
+                                ${escapeHtml(item.text)}
+                            </span>
+                        </label>
+
+                        <div class="item-actions">
+                            <button
+                                class="move-btn"
+                                onclick="moveItemUp(${categoryIndex}, ${itemIndex})">
+                                ↑
+                            </button>
+
+                            <button
+                                class="move-btn"
+                                onclick="moveItemDown(${categoryIndex}, ${itemIndex})">
+                                ↓
+                            </button>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteItem(${categoryIndex}, ${itemIndex})">
+                                削除
+                            </button>
+                        </div>
+                    `;
+
+                    const checkbox =
+                        itemRow.querySelector("input");
+
+                    checkbox.addEventListener("change", event => {
+
+                        item.checked =
+                            event.target.checked;
+
+                        saveData();
+                        renderList();
+                    });
+
+                    itemRow.addEventListener("dragstart", function () {
+
+                        draggedItem = {
+                            categoryIndex: categoryIndex,
+                            itemIndex: itemIndex
+                        };
+
+                        itemRow.classList.add("dragging");
+                    });
+
+                    itemRow.addEventListener("dragend", function () {
+
+                        draggedItem = null;
+
+                        document
+                            .querySelectorAll(".dragging")
+                            .forEach(element => {
+                                element.classList.remove("dragging");
+                            });
+
+                        document
+                            .querySelectorAll(".drag-over")
+                            .forEach(element => {
+                                element.classList.remove("drag-over");
+                            });
+                    });
+
+                    itemRow.addEventListener("dragover", function (event) {
+                        event.preventDefault();
+                    });
+
+                    itemRow.addEventListener("drop", function (event) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        if (!draggedItem) {
+                            return;
+                        }
+
+                        moveItem(
+                            draggedItem.categoryIndex,
+                            draggedItem.itemIndex,
+                            categoryIndex,
+                            itemIndex
+                        );
+                    });
+
+                    itemList.appendChild(itemRow);
+
+                });
+
+                listContainer.appendChild(section);
+
+            });
+
+            updateProgress();
+        }
+
+        function addCategory() {
+
+            const categoryName =
+                prompt("新しいカテゴリ名を入力してください");
+
+            if (!categoryName) {
+                return;
+            }
+
+            const trimmedName =
+                categoryName.trim();
+
+            if (trimmedName === "") {
+                return;
+            }
+
+            data.push({
+                category: trimmedName,
+                items: []
+            });
+
+            saveData();
+            renderList();
+        }
+
+        function editCategory(categoryIndex) {
+
+            const currentName =
+                data[categoryIndex].category;
+
+            const newName =
+                prompt("カテゴリ名を編集してください", currentName);
+
+            if (!newName) {
+                return;
+            }
+
+            const trimmedName =
+                newName.trim();
+
+            if (trimmedName === "") {
+                return;
+            }
+
+            data[categoryIndex].category =
+                trimmedName;
+
+            saveData();
+            renderList();
+        }
+
+        function deleteCategory(categoryIndex) {
+
+            const categoryName =
+                data[categoryIndex].category;
+
+            const result =
+                confirm(`カテゴリ「${categoryName}」を削除しますか？\n中のアイテムも削除されます。`);
+
+            if (!result) {
+                return;
+            }
+
+            data.splice(categoryIndex, 1);
+
+            saveData();
+            renderList();
+        }
+
+        function addItem(categoryIndex) {
+
+            const input =
+                document.getElementById(`input-${categoryIndex}`);
+
+            const text =
+                input.value.trim();
+
+            if (text === "") {
+                return;
+            }
+
+            data[categoryIndex].items.push({
+                text: text,
+                checked: false
+            });
+
+            saveData();
+            renderList();
+        }
+
+        function deleteItem(categoryIndex, itemIndex) {
+
+            const itemName =
+                data[categoryIndex].items[itemIndex].text;
+
+            const result =
+                confirm(`「${itemName}」を削除しますか？`);
+
+            if (!result) {
+                return;
+            }
+
+            data[categoryIndex].items.splice(itemIndex, 1);
+
+            saveData();
+            renderList();
+        }
+
+        function moveItem(fromCategoryIndex, fromItemIndex, toCategoryIndex, toItemIndex) {
+
+            if (
+                fromCategoryIndex === toCategoryIndex &&
+                fromItemIndex === toItemIndex
+            ) {
+                return;
+            }
+
+            const movedItem =
+                data[fromCategoryIndex].items.splice(fromItemIndex, 1)[0];
+
+            if (
+                fromCategoryIndex === toCategoryIndex &&
+                fromItemIndex < toItemIndex
+            ) {
+                toItemIndex--;
+            }
+
+            data[toCategoryIndex].items.splice(
+                toItemIndex,
+                0,
+                movedItem
             );
 
+            saveData();
+            renderList();
+        }
+
+        function moveItemUp(categoryIndex, itemIndex) {
+
+            if (itemIndex === 0) {
+                return;
+            }
+
+            moveItem(
+                categoryIndex,
+                itemIndex,
+                categoryIndex,
+                itemIndex - 1
+            );
+        }
+
+        function moveItemDown(categoryIndex, itemIndex) {
+
+            const lastIndex =
+                data[categoryIndex].items.length - 1;
+
+            if (itemIndex >= lastIndex) {
+                return;
+            }
+
+            moveItem(
+                categoryIndex,
+                itemIndex,
+                categoryIndex,
+                itemIndex + 2
+            );
+        }
+
+        function resetToDefault() {
+
+            const result =
+                confirm("チェック状態・追加項目・カテゴリ編集をすべてリセットして、初期リストに戻しますか？");
+
+            if (!result) {
+                return;
+            }
+
+            data = cloneDefaultData();
+
+            saveData();
+            renderList();
+        }
+
+        document
+            .getElementById("addCategoryButton")
+            .addEventListener("click", addCategory);
+
+        document
+            .getElementById("resetButton")
+            .addEventListener("click", resetToDefault);
+
+        document.addEventListener("keydown", event => {
+
+            if (event.key !== "Enter") {
+                return;
+            }
+
+            const activeElement =
+                document.activeElement;
+
+            if (!activeElement || activeElement.tagName !== "INPUT") {
+                return;
+            }
+
+            const id =
+                activeElement.id;
+
+            if (!id.startsWith("input-")) {
+                return;
+            }
+
+            const categoryIndex =
+                Number(id.replace("input-", ""));
+
+            addItem(categoryIndex);
         });
 
-        list.appendChild(
-            section
-        );
+        renderList();
 
-    });
-
-    updateProgress();
-}
-
-render();
-
-</script>
+    </script>
 
 </body>
 

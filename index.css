@@ -200,16 +200,14 @@ body{
 }
 
 .logo{
-    width:min(220px, 65vw);
+    width:min(120px, 35vw);
 
     height:auto;
 
     display:block;
 
-    filter:
-        drop-shadow(
-            0 8px 24px rgba(0,0,0,0.35)
-        );
+    margin-top:-120px;
+    margin-bottom:-80px;
 }
 
 @media (max-width:768px){

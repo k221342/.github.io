@@ -1,79 +1,111 @@
+*{
+    box-sizing:border-box;
+}
+
 body{
 
     margin:0;
 
     min-height:100vh;
-
     min-height:100dvh;
 
-    background-image:url("images/wucc2026-background.jpg");
+    background:
+        linear-gradient(
+            135deg,
+            #005a37,
+            #006b42,
+            #003126
+        );
 
-    background-size:cover;
+    font-family:
+        Arial,
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        sans-serif;
 
-    background-position:center center;
+    display:flex;
 
-    background-repeat:no-repeat;
+    justify-content:center;
 
-    background-attachment:scroll;
-
-    font-family:sans-serif;
-
-    position:relative;
-}
-
-body::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:rgba(0,0,0,0.35);
-
-    pointer-events:none;
-
-    z-index:0;
+    padding:40px 20px;
 }
 
 .hero{
 
-    position:absolute;
+    width:min(520px, 100%);
 
-    z-index:1;
+    display:flex;
 
-    left:50%;
+    flex-direction:column;
 
-    bottom:8%;
+    align-items:center;
 
-    transform:translateX(-50%);
+    gap:24px;
+}
+
+.logo{
+
+    width:min(340px, 85vw);
+
+    height:auto;
+
+    display:block;
+
+    filter:
+        drop-shadow(
+            0 8px 24px rgba(0,0,0,0.35)
+        );
+}
+
+.countdown{
 
     text-align:center;
+
+    color:white;
 }
 
-h1{
-    font-size:3rem;
-    margin-bottom:20px;
+.countdown-label{
+
+    font-size:0.85rem;
+
+    font-weight:bold;
+
+    letter-spacing:4px;
+
+    opacity:0.8;
+
+    margin-bottom:8px;
 }
 
-p{
-    margin-bottom:30px;
+.countdown-time{
+
+    font-size:2.2rem;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    text-shadow:
+        0 4px 12px rgba(0,0,0,0.4);
 }
 
 .button-group{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
 }
 
 .menu-card{
 
-    width:180px;
+    width:100%;
 
-    padding:20px;
-
-    background:rgba(255,255,255,0.92);
+    background:
+        rgba(255,255,255,0.95);
 
     border-radius:24px;
 
@@ -81,21 +113,27 @@ p{
 
     color:#14532d;
 
-    text-align:center;
+    display:flex;
 
-    backdrop-filter:blur(8px);
+    align-items:center;
+
+    gap:18px;
+
+    padding:20px 22px;
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,0.20);
+        0 8px 20px rgba(0,0,0,0.18);
 
-    transition:all 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
 .menu-card:hover{
 
     transform:
-        translateY(-5px)
-        scale(1.03);
+        translateY(-3px);
 
     background:white;
 
@@ -105,20 +143,29 @@ p{
 
 .menu-icon{
 
-    font-size:3rem;
+    font-size:2rem;
 
-    margin-bottom:10px;
+    width:48px;
+
+    text-align:center;
+
+    flex-shrink:0;
+}
+
+.menu-content{
+
+    flex:1;
 }
 
 .menu-title{
 
-    font-size:1.1rem;
+    font-size:1.2rem;
 
-    font-weight:bold;
+    font-weight:700;
 
     letter-spacing:2px;
 
-    margin-bottom:8px;
+    margin-bottom:4px;
 }
 
 .menu-desc{
@@ -127,62 +174,60 @@ p{
 
     color:#666;
 }
-.countdown{
+
+.menu-arrow{
+
+    font-size:1.8rem;
+
+    color:#999;
+
+    flex-shrink:0;
+}
+
+.footer-info{
 
     text-align:center;
 
-    margin-bottom:24px;
-}
+    color:rgba(255,255,255,0.75);
 
-.countdown-label{
-
-    color:white;
-
-    font-size:0.9rem;
-
-    letter-spacing:3px;
-
-    font-weight:bold;
-
-    margin-bottom:8px;
-
-    text-shadow:
-        0 2px 8px rgba(0,0,0,0.4);
-}
-
-.countdown-time{
-
-    color:white;
-
-    font-size:2.2rem;
-
-    font-weight:bold;
+    font-size:0.8rem;
 
     letter-spacing:2px;
 
-    text-shadow:
-        0 4px 12px rgba(0,0,0,0.5);
+    line-height:1.8;
+
+    margin-top:8px;
 }
+
 @media (max-width:768px){
+
+    body{
+
+        padding:24px 16px;
+    }
 
     .hero{
 
-        display:flex;
-
-        flex-direction:column;
-
-        align-items:center;
-
-        gap:15px;
-
-        width:100%;
+        gap:20px;
     }
 
-    .btn{
+    .countdown-time{
 
-        width:280px;
+        font-size:1.8rem;
+    }
 
-        background:rgba(255,255,255,0.95);
+    .menu-card{
+
+        padding:18px;
+    }
+
+    .menu-icon{
+
+        font-size:1.8rem;
+    }
+
+    .menu-title{
+
+        font-size:1.05rem;
     }
 }
-

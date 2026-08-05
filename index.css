@@ -198,7 +198,19 @@ body{
 
     margin-top:8px;
 }
+.logo{
 
+    width:min(340px, 85vw);
+
+    height:auto;
+
+    display:block;
+
+    filter:
+        drop-shadow(
+            0 8px 24px rgba(0,0,0,0.35)
+        );
+}
 @media (max-width:768px){
 
     body{

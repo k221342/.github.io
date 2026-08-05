@@ -200,22 +200,17 @@ body{
 }
 
 .logo{
-    width:120px;
-
+    width:80px;
     height:auto;
-
     display:block;
-
-    filter:
-        drop-shadow(
-            0 8px 24px rgba(0,0,0,0.35)
-        );
 }
 
 @media (max-width:768px){
 
     .logo{
-        width:min(180px, 60vw);
+        width:80px;
+        height:auto;
+        display:block;
     }
 
     body{

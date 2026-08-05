@@ -127,7 +127,42 @@ p{
 
     color:#666;
 }
+.countdown{
 
+    text-align:center;
+
+    margin-bottom:24px;
+}
+
+.countdown-label{
+
+    color:white;
+
+    font-size:0.9rem;
+
+    letter-spacing:3px;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,0.4);
+}
+
+.countdown-time{
+
+    color:white;
+
+    font-size:2.2rem;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    text-shadow:
+        0 4px 12px rgba(0,0,0,0.5);
+}
 @media (max-width:768px){
 
     .hero{

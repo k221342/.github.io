@@ -177,12 +177,17 @@ body{
 
 .menu-arrow{
 
-    font-size:1.2rem;
+    font-size:1.8rem;
 
     color:#999;
 
     flex-shrink:0;
 }
+
+.menu-arrow-external{
+    font-size:1.2rem;
+}
+
 
 .footer-info{
 
